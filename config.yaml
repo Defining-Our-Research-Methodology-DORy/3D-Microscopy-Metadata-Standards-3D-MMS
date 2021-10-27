@@ -1,0 +1,6 @@
+# Name of metadata category
+# Options and details can be found in README.md: contributors, dataset, funders, image, instrument, publications, specimen
+category: contributors
+
+# Name of input data file to validate
+input_file_name: contributors_test.json

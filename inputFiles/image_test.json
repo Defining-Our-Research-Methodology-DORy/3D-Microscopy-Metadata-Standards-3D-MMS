@@ -1,0 +1,15 @@
+{
+	"xAxis": "Oblique",
+	"obliqueXDim1": "Left",
+	"obliqueXDim2": "Anterior",
+	"obliqueXDim3": "Inferior",
+	"yAxis": "Oblique",
+	"obliqueYDim1": "Left",
+	"obliqueYDim2": "Anterior",
+	"obliqueYDim3": "Inferior",
+	"zAxis": "Anterior-to-posterior",
+	"Number": "",
+	"displayColor": "",
+	"stepSizeX": "",
+	"stepSizeY": ""
+}

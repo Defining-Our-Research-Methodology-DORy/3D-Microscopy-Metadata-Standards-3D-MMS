@@ -1,0 +1,192 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "[unique_identifier_for_this_schema]",
+    "title": "Image",
+    "description": "The Image category includes 33 metadata fields that describe the size and 3-dimensional orientation of the image, the channels and fluorophores used, and the location of relevant landmarks.",
+		"type": "object",
+		"required": ["xAxis","yAxis","zAxis","Number","displayColor","stepSizeX","stepSizeY"],
+		"properties": {
+				"xAxis": {
+						"description": "Predominant tissue direction as one moves from the left side of the image to the right side of the image.",
+						"type": "string",
+						"enum": ["Left-to-right", "Right-to-left", "Anterior-to-posterior", "Posterior-to-anterior", "Inferior-to-superior", "Superior-to-inferior", "Oblique"]
+				},
+				"obliqueXDim1": {
+						"description": "Only if xAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Left","Right"]
+				},
+				"obliqueXDim2": {
+						"description": "Only if xAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Anterior","Posterior"]
+				},
+				"obliqueXDim3": {
+						"description": "Only if xAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Inferior","Superior"]
+				},
+				"yAxis": {
+						"description": "Predominant tissue direction as one moves from the top of the image to the bottom of the image.",
+						"type": "string",
+						"enum": ["Left-to-right", "Right-to-left", "Anterior-to-posterior", "Posterior-to-anterior", "Inferior-to-superior", "Superior-to-inferior", "Oblique"]
+				},
+				"obliqueYDim1": {
+						"description": "Only if yAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Left","Right"]
+				},
+				"obliqueYDim2": {
+						"description": "Only if yAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Anterior","Posterior"]
+				},
+				"obliqueYDim3": {
+						"description": "Only if yAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Inferior","Superior"]
+				},
+				"zAxis": {
+						"description": "Predominant tissue direction as one follows a given pixel position through the stack of images from the first image to the last image.",
+						"type": "string",
+						"enum": ["Left-to-right", "Right-to-left", "Anterior-to-posterior", "Posterior-to-anterior", "Inferior-to-superior", "Superior-to-inferior", "Oblique"]
+				},
+				"obliqueZDim1": {
+						"description": "Only if zAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Left","Right"]
+				},
+				"obliqueZDim2": {
+						"description": "Only if zAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Anterior","Posterior"]
+				},
+				"obliqueZDim3": {
+						"description": "Only if zAxis is oblique, enter the orientation.",
+						"type": "string",
+						"enum": ["Inferior","Superior"]
+				},
+				"landmarkName": {
+						"description": "Name of the landmark (e.g., bregma).",
+						"type": "string"
+				},
+				"landmarkX": {
+						"description": "X coordinate of the landmark.",
+						"type": "string"
+				},
+				"landmarkY": {
+						"description": "Y coordinate of the landmark.",
+						"type": "string"
+				},
+				"landmarkZ": {
+						"description": "Z coordinate of the landmark.",
+						"type": "string"
+				},
+				"Number": {
+						"description": "Number assigned to each channel.",
+						"type": "string"
+				},
+				"displayColor": {
+						"description": "Display color of each channel in triplet (red, green, blue) format.",
+						"type": "string"
+				},
+				"Representation": {
+						"description": "What the channel represents (e.g., rhodopsin, virus).",
+						"type": "string"
+				},
+				"Flurophore": {
+						"description": "Fluorophore used in the channel (e.g., egfp, alexa-561, ATO-647). ",
+						"type": "string"
+				},
+				"stepSizeX": {
+						"description": "Physical step size in the X-dimension (e.g., pixel size represents the number of microns).",
+						"type": "string"
+				},
+				"stepSizeY": {
+						"description": "Physical step size in the Y-dimension (e.g., pixel size represents the number of microns).",
+						"type": "string"
+				},
+				"stepSizeZ": {
+						"description": "Distance between the center of one image and the center of adjacent images in the Zdimension (space in microns between slices).",
+						"type": "string"
+				},
+				"stepSizeT": {
+						"description": "Physical step size in the T dimension (time).",
+						"type": "string"
+				},
+				"Channel": {
+						"description": "Number of channels.",
+						"type": "string"
+				},
+				"Slices": {
+						"description": "Number of slices per channel (approximate).",
+						"type": "string"
+				},
+				"t": {
+						"description": "Number of timepoints.",
+						"type": "string"
+				},
+				"xSize": {
+						"description": "Number of pixels in the X-dimension.",
+						"type": "string"
+				},
+				"ySize": {
+						"description": "Number of pixels in the Y-dimension.",
+						"type": "string"
+				},
+				"zSize": {
+						"description": "Number of pixels in the Z-dimension.",
+						"type": "string"
+				},
+				"Gbyte": {
+						"description": "Total size in gigabytes.",
+						"type": "string"
+				},
+				"File": {
+						"description": "Total number of image files.",
+						"type": "string"
+				},
+				"dimensionOrder": {
+						"description": "XYZT, or whatever order is used.",
+						"type": "string"
+				}
+		},
+		"allOf": [{
+						"if": {
+								"properties": {
+										"xAxis": {
+												"const": "Oblique"
+										}
+								},
+								"required": ["xAxis"]
+						},
+						"then": {
+								"required": ["obliqueXDim1","obliqueXDim2","obliqueXDim3"]
+						}
+				}, {
+						"if": {
+								"properties": {
+										"yAxis": {
+												"const": "Oblique"
+										}
+								},
+								"required": ["yAxis"]
+						},
+						"then": {
+								"required": ["obliqueYDim1","obliqueYDim2","obliqueYDim3"]
+						}
+				},{
+						"if": {
+								"properties": {
+										"zAxis": {
+												"const": "Oblique"
+										}
+								},
+								"required": ["zAxis"]
+						},
+						"then": {
+								"required": ["obliqueZDim1","obliqueZDim2","obliqueZDim3"]
+						}
+				},
+		]
+}

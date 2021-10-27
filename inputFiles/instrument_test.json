@@ -1,0 +1,14 @@
+	{
+		"microscopeType": "confocal",
+		"microscopeManufacturerAndModel": "Nikon 2000",
+		"objectiveManufacturerAndModel": "Nikon 2000a3",
+		"objectiveImmersion": "Oil",
+		"objectiveNA": "f/2",
+		"objectiveMagnification": "200",
+		"detectorType": "Photodiode",
+		"detectorManufacturerAndModel": "Nikon 2000d1",
+		"illuminationType": "Dye",
+		"lluminationWavelength": "400nm",
+		"detectionWavelength": "400nm",
+		"illuminationType": "10C"
+	}

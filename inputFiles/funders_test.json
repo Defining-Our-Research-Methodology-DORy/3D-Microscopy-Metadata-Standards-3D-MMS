@@ -1,0 +1,26 @@
+	[
+		{
+			"funderName": "Your Name 1",
+			"fundingReferenceIdentifier": "id1",
+			"fundingReferenceIdentifierType": "GRID",
+			"awardNumber": "Award1",
+          	"NIH": "No",
+			"awardTitle": "This is my title 1"
+		},
+		{
+			"funderName": "Your Name 2",
+			"fundingReferenceIdentifier": "id2",
+			"fundingReferenceIdentifierType": "GRID",
+			"awardNumber": "Award2",
+          	"NIH": "No",
+			"awardTitle": "This is my title 2"
+		},
+		{
+			"funderName": "Your Name 3",
+			"fundingReferenceIdentifier": "id3",
+			"fundingReferenceIdentifierType": "GRID",
+			"awardNumber": "Award3",
+          	"NIH": "Yes",
+			"awardTitle": "This is my title 3"
+		}
+	]
