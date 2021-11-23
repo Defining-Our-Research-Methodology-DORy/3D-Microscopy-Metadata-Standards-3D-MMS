@@ -124,14 +124,14 @@
 
 		"Publications": [
 			{
-			"relatedIdentifier":["HI", "HI2"],
+			"relatedIdentifier": "ID1",
 			"relatedIdentifierType": ["arXiv"],
 			"PMCID": ["id1"],
 			"relationType": ["IsCitedBy"],
 			"Citation": "citationExample"
 			},
 			{
-			"relatedIdentifier": ["HI3"],
+			"relatedIdentifier": "ID2",
 			"relatedIdentifierType": ["DOI", "ISBN"],
 			"PMCID": ["id1", "id2"],
 			"relationType": ["IsDocumentedBy"],
