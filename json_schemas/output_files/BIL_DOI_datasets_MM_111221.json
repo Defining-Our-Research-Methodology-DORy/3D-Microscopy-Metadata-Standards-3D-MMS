@@ -1,0 +1,122 @@
+{
+    "Contributors": [
+        {
+            "contributorName": "Ropelewski, Alexander",
+            "Creator": "Yes",
+            "contributorType": "ProjectLeader",
+            "nameType": "Personal",
+            "nameIdentifier": "https://orcid.org/0000-0001-6874-4477",
+            "nameIdentifierScheme": "ORCID",
+            "affiliation": "Pittsburgh Supercomputing Center",
+            "affiliationIdentifier": "https://ror.org/04tac1482",
+            "affiliationIdentifierScheme": "ROR"
+        },
+        {
+            "contributorName": "Biomedical Applications Group",
+            "Creator": "No",
+            "contributorType": "ResearchGroup",
+            "nameType": "Organizational",
+            "nameIdentifier": "",
+            "nameIdentifierScheme": "",
+            "affiliation": "Pittsburgh Supercomputing Center",
+            "affiliationIdentifier": "https://ror.org/04tac1482",
+            "affiliationIdentifierScheme": "ROR"
+        }
+    ],
+    "Publication": [
+        {
+            "relatedIdentifier": "https://doi.org/10.1145/3219104.3229266",
+            "relatedIdentifierType": "DOI",
+            "PMCID": "",
+            "relationType": "IsCitedBy",
+            "citation": "Sean Deitrich, Jacob Czech, Alexander Ropelewski, Arthur W. Wetzel, Greg Hood, Derek Simmel, Marcel Bruchez, Simon C. Watkins, and Alan M. Watson. 2018. Applying iRODS to the Brain Image Library. In Proceedings of the Practice and Experience on Advanced Research Computing (PEARC ’18). Association for Computing Machinery, New York, NY, USA, Article 79, 1–4. DOI:https://doi.org/10.1145/3219104.3229266"
+        }
+    ],
+    "Funders": [
+        {
+            "funderName": "National Institutes of Health",
+            "fundingReferenceIdentifier": "https://ror.org/01cwqze88",
+            "fundingReferenceIdentifierType": "ROR",
+            "awardNumber": "5-R24-MH114793-03",
+            "awardTitle": "A Confocal Fluorescence Microscopy Brain Data Archive"
+        }
+    ],
+    "Instrument": {
+        "MicroscopeType": "Confocal",
+        "MicroscopeManufacturerAndModel": "Caliber I.D. RS-G4 ",
+        "ObjectiveName": "",
+        "ObjectiveImmersion": "Oil",
+        "ObjectiveNA": "",
+        "ObjectiveMagnification": "",
+        "DetectorType": "PMT",
+        "DetectorModel": "",
+        "IlluminationTypes": "",
+        "IlluminationWavelength": "400–850 nm",
+        "DetectionWavelength": "",
+        "SampleTemperature": ""
+    },
+    "Dataset": {
+        "BILDirectory": "ftp://download.brainimagelibrary.org:8811/ab/cd/abcdef0123456789/example_dataset_01/",
+        "title": "Whole-brain confocal imaging of B6 mouse infected with encephalitic alphavirus",
+        "socialMedia": "Whole-brain confocal imaging of B6 mouse infected with encephalitic alphavirus",
+        "subject": "",
+        "Subjectscheme": "",
+        "rights": "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+        "rightsURI": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "rightsIdentifier": "CC-BY-NC-SA-4.0",
+        "Image": "",
+        "GeneralModality": "",
+        "Technique": "",
+        "Other": "",
+        "": "This dataset is part of a whole-brain imaging experiment describing the first application of multicolor ribbon scanning confocal methods to collect high-resolution volume images of chemically cleared brains. Here, we reconstruct a large mouse brain volume infected with encephalitic alphaviruses and demonstrate that regions of the brain with abundant viral replication were inaccessible to vascular perfusion. This reveals that the destruction or collapse of large regions of brain micro vasculature may contribute to the severe disease caused by Venezuelan equine encephalitis virus. ",
+        "Methods": "A full protocol describing this work is available at protocols.io: dx.doi.org/10.17504/protocols.io.4xjgxkn",
+        "TechnicalInfo": ""
+    },
+    "Specimen": {
+        "LocalID": "M180517",
+        "Species": "Mouse",
+        "NCBITaxonomy": "NCBI:txid10090",
+        "Age": "93",
+        "Ageunit": "Days",
+        "Sex": "Female",
+        "Genotype": "Strain_Name='C57BL6';Cre_Driver_Line='Pvalb';Reporter_Name='Ai75';",
+        "OrganName": "Brain",
+        "Atlas": "AllenMouseV2",
+        "Locations": "MOp - Primary motor area"
+    },
+    "Image": {
+        "xAxis": "",
+        "obliqueXdim1": "",
+        "obliqueXdim2": "",
+        "obliqueXdim3": "",
+        "yAxis": "",
+        "obliqueYdim1": "",
+        "obliqueYdim2": "",
+        "obliqueYdim3": "",
+        "zAxis": "",
+        "obliqueZdim1": "",
+        "obliqueZdim2": "",
+        "obliqueZdim3": "",
+        "landmarkName": "",
+        "landmarkX": "",
+        "landmarkY": "",
+        "landmarkZ": "",
+        "Number": "1,2",
+        "displayColor": "(1.0, 0.0, 0.0),(0.0, 1.0, 0.0)",
+        "Representation": "",
+        "Flurophore": "(tdTomato,EGFP)",
+        "stepSizeX": "",
+        "stepSizeY": "",
+        "stepSizeZ": "",
+        "stepSizeT": "",
+        "Channels": "2",
+        "Slices": "1050",
+        "z": "1",
+        "Xsize": "",
+        "Ysize": "",
+        "Zsize": "",
+        "Gbytes": "",
+        "Files": "",
+        "DimensionOrder": ""
+    }
+}

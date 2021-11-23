@@ -1,0 +1,51 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "[unique_identifier_for_this_schema]",
+    "title": "Funders",
+    "description": "The Funders category includes five metadata fields that describe the organizations providing financial support for the generation of the dataset.",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "funderName": {
+                "description": "Name of the funder.",
+                "type": "string"
+            },
+            "fundingReferenceIdentifier": {
+                "description": "Alphanumeric code that uniquely identifies an individual or legal entity. Preferred identifier is ROR. ",
+                "type": "string"
+            },
+            "fundingReferenceIdentifierType": {
+                "description": "The Identifying scheme used in fundingReferenceIdentifier.",
+                "type": "string",
+                "enum": ["GRID", "ISNI", "ORCID", "ROR", "RRID"]
+            },
+            "awardNumber": {
+                "description": "Funding code or project number assigned to the grant.",
+                "type": "string"
+            },
+            "awardTitle": {
+                "description": "Title of the grant award.",
+                "type": "string"
+            },
+            "NIH": {
+                "description": "Is this a NIH project?",
+                "type": "string",
+                "enum": ["Yes", "No"]
+            }
+        }
+				"if": {
+					"properties": {
+							"NIH": {
+									"const": "Yes"
+							}
+					}
+				},
+				"then": {
+						"required": ["funderName", "fundingReferenceIdentifier", "fundingReferenceIdentifierType", "awardNumber", "awardTitle"]
+				},
+				"else": {
+						"required": []
+				}
+    }
+}

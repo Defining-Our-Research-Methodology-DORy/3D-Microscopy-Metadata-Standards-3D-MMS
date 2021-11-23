@@ -1,0 +1,157 @@
+[
+	{
+		"Contributors": [
+		{
+			"contributorName": "Your Name",
+			"Creator": "Yes",
+			"contributorType": ["Researcher"],
+			"nameType": ["Personal"],
+			"nameIdentifier": ["YN"],
+			"nameIdentifierScheme": ["GRID"],
+			"affiliation": ["Also YN"],
+			"affiliationIdentifier": ["AYN"],
+			"affiliationIdentifierScheme": ["GRID"]
+		},
+		{
+			"contributorName": "Your Name 2",
+			"Creator": "Yes",
+			"contributorType": ["Researcher", "ProjectLeader"],
+			"nameType": ["Personal", "Organizational"],
+			"nameIdentifier": ["YN"],
+			"nameIdentifierScheme": ["GRID", "ROR", "RRID"],
+			"affiliation": ["Also YN", "Another"],
+			"affiliationIdentifier": ["AYN"],
+			"affiliationIdentifierScheme": ["ISNI", "ORCID"]
+		}
+	],
+
+		"Dataset":
+			{
+			"Title": "title of a book",
+			"socialMedia": "title of a book",
+			"Subject": "classificationCode21",
+			"subjectScheme": "Allen Mouse Brain Atlas",
+			"Rights": "license45a",
+			"rightsURI": "https://spdx.org/licenses",
+			"rightsIdentifier": "SPDX90",
+			"Image": "imageExample",
+			"generalModality": "Other",
+			"generalModalityOther": "modality1",
+			"Technique": "Other",
+			"techniqueOther": "smFISH2",
+			"Abstract": "Pesticide (fenthion) which finds its way into water bodies, bring about physiological changes in aquatic animals, via histomorphology and histopathology of various tissues. In fishes, it induces disorders including hyposecretion of gonadotropin in the PPD and regression of gonads. Light microscopic studies were made on control and treated pituitary (gonadotropin secreting cells-GTH) and testis of Glossogobius giuris (HAM) during spawning phase after exposing them to different (0.05 to 0.5 ppm) sub-lethal concentration of fenthion for a short-term period (24 to 96 hrs). The results indicated alteration in normal histology of gonadotropin secreting cells and testis, reduction in number of sperms and degranulation of GTH cells under light microscopy. Degeneration and fragmentation of cytoplasmic organelles was noticed in GTH cells under electron microscope, with the increase in the sub-lethal concentration of fenthion. Significance of the results is discussed in detail in the manuscript.",
+			"Methods": "imaging method 2",
+			"technicalInfo": "version2"
+		},
+
+		"Funders": [
+			{
+				"funderName": "Your Name 1",
+				"fundingReferenceIdentifier": ["id1", "id2"],
+				"fundingReferenceIdentifierType": ["GRID", "ROR"],
+				"awardNumber": ["Award1", "Award2"],
+				"NIH": "No",
+				"awardTitle": ["This is my title 1", "second title"]
+			},
+			{
+				"funderName": "Your Name 2",
+				"fundingReferenceIdentifier": ["id1"],
+				"fundingReferenceIdentifierType": ["ROR"],
+				"awardNumber": ["Award2"],
+				"NIH": "No",
+				"awardTitle": ["This is my title 2"]
+			},
+			{
+				"NIH": "Yes",
+				"funderName": "Your Name 3",
+				"fundingReferenceIdentifier": ["id1", "id2"],
+				"fundingReferenceIdentifierType": ["GRID", "ROR"],
+				"awardNumber": ["Award1", "Award2"],
+				"awardTitle": ["This is my title 3", "another title"],
+			}
+		],
+
+		"Image":
+			{
+				"xAxis": "Oblique",
+				"obliqueXDim1": "Left",
+				"obliqueXDim2": "Anterior",
+				"obliqueXDim3": "Inferior",
+				"yAxis": "Left-to-right",
+				"obliqueYDim1": "Left",
+				"obliqueYDim2": "Anterior",
+				"obliqueYDim3": "Inferior",
+				"zAxis": "Anterior-to-posterior",
+				"obliqueZDim1": "Right",
+				"obliqueZDim2": "Posterior",
+				"obliqueZDim3": "Superior",
+				"landmarkX": 5,
+				"landmarkY": 20,
+				"landmarkZ": 2,
+				"Number": 10,
+				"displayColor": ["red","blue"],
+				"Representation": "rhodopsin",
+				"Flurophore": "egfp",
+				"stepSizeX": "",
+				"stepSizeY": "",
+				"stepSizeZ": "",
+				"stepSizeT": "",
+				"Channel": 3,
+				"Slices": 4,
+				"t": 3,
+				"xSize": 20,
+				"ySize": 30,
+				"zSize": 40,
+				"Gbyte": 2.1,
+				"File": 3.2,
+				"dimensionOrder": "XYZT"
+			},
+
+		"Instrument": {
+			"microscopeType": "confocal",
+			"microscopeManufacturerAndModel": "Nikon 2000",
+			"objectiveManufacturerAndModel": "Nikon 2000a3",
+			"objectiveImmersion": "Oil",
+			"objectiveNA": 2,
+			"objectiveMagnification": 200,
+			"detectorType": "Photodiode",
+			"detectorManufacturerAndModel": "Nikon 2000d1",
+			"illuminationType": "Dye",
+			"illuminationWavelength": "400nm",
+			"detectionWavelength": "400nm",
+			"illuminationType": "10C"
+		},
+
+		"Publications": [
+			{
+			"relatedIdentifier":["HI", "HI2"],
+			"relatedIdentifierType": ["arXiv"],
+			"PMCID": ["id1"],
+			"relationType": ["IsCitedBy"],
+			"Citation": "citationExample"
+			},
+			{
+			"relatedIdentifier": ["HI3"],
+			"relatedIdentifierType": ["DOI", "ISBN"],
+			"PMCID": ["id1", "id2"],
+			"relationType": ["IsDocumentedBy"],
+			"Citation": "citationExample2"
+			}
+		],
+
+		"Specimen": {
+			"LocalID": "id",
+			"Species": "Mouse",
+			"NCBITaxonomy": "10090",
+			"Age": 28,
+			"ageUnit": "Days",
+			"Sex": "Female",
+			"Genotype": "wt",
+			"organLocalID": "1234",
+			"organName": "brain",
+			"sampleLocalID": "1234s",
+			"Atlas": "Allen Mouse V3",
+			"Location": "Hippocampus"
+		}
+	}
+]
