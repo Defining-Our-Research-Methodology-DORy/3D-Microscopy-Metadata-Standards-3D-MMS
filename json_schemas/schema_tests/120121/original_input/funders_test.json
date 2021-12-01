@@ -1,0 +1,27 @@
+{
+	"Your Name 1": {
+		"funderName": "Your Name 1",
+		"fundingReferenceIdentifier": ["id1", "id2"],
+		"fundingReferenceIdentifierType": ["GRID", "ROR"],
+		"awardNumber": ["Award1", "Award2"],
+		"NIH": "No",
+		"awardTitle": ["This is my title 1", "second title"]
+	},
+	"Your Name 2": {
+		"funderName": "Your Name 2",
+		"fundingReferenceIdentifier": ["id1"],
+		"fundingReferenceIdentifierType": ["ROR"],
+		"awardNumber": ["Award2"],
+		"NIH": "No",
+		"awardTitle": ["This is my title 2"]
+	},
+	"Your Name 3": {
+		"NIH": "Yes",
+		"funderName": "Your Name 3",
+		"fundingReferenceIdentifier": ["id1", "id2"],
+		"fundingReferenceIdentifierType": ["GRID", "ROR"],
+		"awardNumber": ["Award1", "Award2"],
+		"awardTitle": ["This is my title 3", "another title"],
+	}
+}
+

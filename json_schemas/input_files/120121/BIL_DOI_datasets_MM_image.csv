@@ -1,0 +1,2 @@
+﻿xAxis,obliqueXDim1,obliqueXDim2,obliqueXDim3,yAxis,obliqueYDim1,obliqueYDim2,obliqueYDim3,zAxis,obliqueZDim1,obliqueZDim2,obliqueZDim3,landmarkName,landmarkX,landmarkY,landmarkZ,Number,displayColor,Representation,Flurophore,stepSizeX,stepSizeY,stepSizeZ,stepSizeT,Channel,Slices,z,xSize,ySize,zSize,Gbyte,File,dimensionOrder
+,,,,,,,,,,,,,,,,"1,2","(1.0, 0.0, 0.0),(0.0, 1.0, 0.0)",,"(tdTomato,EGFP)",,,,,2,1050,1,,,,,,
