@@ -307,13 +307,13 @@
 				"properties": {
 					"relatedIdentifier": {
 						"description": "Alphanumeric code that uniquely identifies the publication or other related information.",
-						"type": "string"
+						"type": ["string", "null"]
 					},
 					"relatedIdentifierType": {
 						"description": "Identifying scheme used in relatedIdentifier. Recommended: DOI, PMID.",
 						"type": "array",
 						"items": {
-							"type": "string",
+							"type": ["string", "null"],
 							"enum": [
 								"arXiv",
 								"DOI",
@@ -326,14 +326,14 @@
 						"description": "PubMed Central identifier (PMCID; if applicable).",
 						"type": "array",
 						"items": {
-							"type": "string"
+							"type": ["string", "null"]
 						}
 					},
 					"relationType": {
 						"description": "DataCite descriptive identifier specifying the relationship. Recommended: IsCitedBy (for publications), IsDocumentedBy (for protocols).",
 						"type": "array",
 						"items": {
-							"type": "string",
+							"type": ["string", "null"],
 							"enum": [
 								"IsCitedBy",
 								"IsDocumentedBy"
@@ -342,7 +342,7 @@
 					},
 					"Citation": {
 						"description": "Complete citation for the publication or other related information.",
-						"type": "string"
+						"type": ["string", "null"]
 					}
 				},
 				"additionalProperties": false
@@ -364,7 +364,7 @@
 			"properties": {
 				"xAxis": {
 					"description": "Predominant tissue direction as one moves from the left side of the image to the right side of the image.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Left-to-right",
 						"Right-to-left",
@@ -372,36 +372,40 @@
 						"Posterior-to-anterior",
 						"Inferior-to-superior",
 						"Superior-to-inferior",
-						"Oblique"
+						"Oblique",
+						null
 					]
 				},
 				"obliqueXDim1": {
 					"description": "Only if xAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Left",
-						"Right"
+						"Right",
+						null
 					]
 				},
 				"obliqueXDim2": {
 					"description": "Only if xAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Anterior",
-						"Posterior"
+						"Posterior",
+						null
 					]
 				},
 				"obliqueXDim3": {
 					"description": "Only if xAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Inferior",
-						"Superior"
+						"Superior",
+						null
 					]
 				},
 				"yAxis": {
 					"description": "Predominant tissue direction as one moves from the top of the image to the bottom of the image.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Left-to-right",
 						"Right-to-left",
@@ -409,36 +413,41 @@
 						"Posterior-to-anterior",
 						"Inferior-to-superior",
 						"Superior-to-inferior",
-						"Oblique"
+						"Superior-to-inferior",
+						"Oblique",
+						null
 					]
 				},
 				"obliqueYDim1": {
 					"description": "Only if yAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Left",
-						"Right"
+						"Right",
+						null
 					]
 				},
 				"obliqueYDim2": {
 					"description": "Only if yAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Anterior",
-						"Posterior"
+						"Posterior",
+						null
 					]
 				},
 				"obliqueYDim3": {
 					"description": "Only if yAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Inferior",
-						"Superior"
+						"Superior",
+						null
 					]
 				},
 				"zAxis": {
 					"description": "Predominant tissue direction as one follows a given pixel position through the stack of images from the first image to the last image.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Left-to-right",
 						"Right-to-left",
@@ -446,48 +455,52 @@
 						"Posterior-to-anterior",
 						"Inferior-to-superior",
 						"Superior-to-inferior",
-						"Oblique"
+						"Oblique",
+						null
 					]
 				},
 				"obliqueZDim1": {
 					"description": "Only if zAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Left",
-						"Right"
+						"Right",
+						null
 					]
 				},
 				"obliqueZDim2": {
 					"description": "Only if zAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Anterior",
-						"Posterior"
+						"Posterior",
+						null
 					]
 				},
 				"obliqueZDim3": {
 					"description": "Only if zAxis is oblique, enter the orientation.",
-					"type": "string",
+					"type": ["string","null"],
 					"enum": [
 						"Inferior",
-						"Superior"
+						"Superior",
+						null
 					]
 				},
 				"landmarkName": {
 					"description": "Name of the landmark (e.g., bregma).",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"landmarkX": {
 					"description": "X coordinate of the landmark.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"landmarkY": {
 					"description": "Y coordinate of the landmark.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"landmarkZ": {
 					"description": "Z coordinate of the landmark.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"Number": {
 					"description": "Number assigned to each channel.",
@@ -505,13 +518,13 @@
 				},
 				"Representation": {
 					"description": "What the channel represents (e.g., rhodopsin, virus).",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"Flurophore": {
 					"description": "Fluorophore used in the channel (e.g., egfp, alexa-561, ATO-647). ",
 					"type": "array",
 					"items": {
-						"type": "string"
+						"type": ["string", "null"]
 					}
 				},
 				"stepSizeX": {
@@ -524,47 +537,47 @@
 				},
 				"stepSizeZ": {
 					"description": "Distance between the center of one image and the center of adjacent images in the Zdimension (space in microns between slices).",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"stepSizeT": {
 					"description": "Physical step size in the T dimension (time).",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"Channel": {
 					"description": "Number of channels.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"Slices": {
 					"description": "Number of slices per channel (approximate).",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"t": {
 					"description": "Number of timepoints.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"xSize": {
 					"description": "Number of pixels in the X-dimension.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"ySize": {
 					"description": "Number of pixels in the Y-dimension.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"zSize": {
 					"description": "Number of pixels in the Z-dimension.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"Gbyte": {
 					"description": "Total size in gigabytes.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"File": {
 					"description": "Total number of image files.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"dimensionOrder": {
 					"description": "XYZT, or whatever order is used.",
-					"type": "string"
+					"type": ["number", "null"]
 				}
 			},
 			"allOf": [
@@ -584,7 +597,30 @@
 							"obliqueXDim1",
 							"obliqueXDim2",
 							"obliqueXDim3"
-						]
+						],
+						"properties": {
+                			"obliqueXDim1": {
+                    			"type": "string",
+								"enum": [
+									"Left",
+									"Right"
+								]
+                			},
+							"obliqueXDim2": {
+                    			"type": "string",
+								"enum": [
+									"Anterior",
+									"Posterior"
+								]
+                			},
+							"obliqueXDim3":{
+                    			"type": "string",
+								"enum": [
+									"Inferior",
+									"Superior"
+								]
+                			}
+            			}
 					}
 				},
 				{
@@ -603,7 +639,30 @@
 							"obliqueYDim1",
 							"obliqueYDim2",
 							"obliqueYDim3"
-						]
+						],
+						"properties": {
+                			"obliqueYDim1": {
+                    			"type": "string",
+								"enum": [
+									"Left",
+									"Right"
+								]
+                			},
+							"obliqueYDim2":{
+                    			"type": "string",
+								"enum": [
+									"Anterior",
+									"Posterior"
+								]
+                			},
+							"obliqueYDim3": {
+                    			"type": "string",
+								"enum": [
+									"Inferior",
+									"Superior"
+								]
+                			},
+            			}
 					}
 				},
 				{
@@ -622,7 +681,30 @@
 							"obliqueZDim1",
 							"obliqueZDim2",
 							"obliqueZDim3"
-						]
+						],
+						"properties": {
+                			"obliqueZDim1": {
+                    			"type": "string",
+								"enum": [
+									"Left",
+									"Right"
+								]
+                			},
+							"obliqueZDim2": {
+                    			"type": "string",
+								"enum": [
+									"Anterior",
+									"Posterior"
+								]
+                			},
+							"obliqueZDim3": {
+                    			"type": "string",
+								"enum": [
+									"Inferior",
+									"Superior"
+								]
+                			}
+            			}
 					}
 				}
 			]
@@ -642,43 +724,43 @@
 				},
 				"objectiveManufacturerAndModel": {
 					"description": "Manufacturer and model of the lens used.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"objectiveImmersion": {
 					"description": "Immersion medium for the lens. Suggested values: Air, Glycerol, Multi, Oil, Water, Water dipping.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"objectiveNA": {
 					"description": "Lens numerical aperture.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"objectiveMagnification": {
 					"description": "Lens magnification.",
-					"type": "number"
+					"type": ["number", "null"]
 				},
 				"detectorType": {
 					"description": "Type of detector used. Suggested values: CCD, Intensified CCD, Analog video, PMT, Photodiode, CMOS, EBCCD, FTIR, spectroscopy, Lifetime imaging, Correlation spectroscopy, EMCCD, APD, etc.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"detectorManufacturerAndModel": {
 					"description": "Manufacturer and model of the detector.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"illuminationType": {
 					"description": "Type of illumination. Suggested values: Gas, Metal vapor, Solid state, Dye, Semiconductor, Free electron, etc. ",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"illuminationWavelength": {
 					"description": "Bandwidth of illumination light.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"detectionWavelength": {
 					"description": "Bandwidth of collected light.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"sampleTemperature": {
 					"description": "Sample temperature at capture.",
-					"type": "string"
+					"type": ["string", "null"]
 				}
 			},
 			"required": [
@@ -706,15 +788,15 @@
 				},
 				"socialMedia": {
 					"description": "Suggested short social media text describing the dataset to be posted after the dataset is available (can include tags). May be same as the title.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"Subject": {
 					"description": "Description of the dataset using keywords, classification codes, or key phrases.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"subjectScheme": {
 					"description": "Name of subject scheme or classification (e.g., Allen Mouse Brain Atlas Version2).",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"Rights": {
 					"description": "Any rights information for the dataset. May be the name of the license and can include embargo or other use restrictions on data (see https://spdx.org/licenses).",
@@ -730,27 +812,28 @@
 				},
 				"Image": {
 					"description": "Suggested static image or animated GIF to associate with the social media and/or web landing page for the dataset.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"generalModality": {
 					"description": "Description of the general modality of the dataset.",
-					"type": "string",
+					"type": ["string", "null"],
 					"enum": [
 						"Cell morphology",
 						"Connectivity",
 						"Population imaging",
 						"Spatial",
 						"transcriptomics",
-						"Other"
+						"Other",
+						null
 					]
 				},
 				"generalModalityOther": {
 					"description": "If generalModality is Other, list the modality used.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"Technique": {
 					"description": "Description of the technique used.",
-					"type": "string",
+					"type": ["string", "null"],
 					"enum": [
 						"Anterograde tracing",
 						"DARTFISH",
@@ -762,12 +845,13 @@
 						"smFISH",
 						"Transynaptic tracing",
 						"TRIO tracing",
-						"Other"
+						"Other",
+						null
 					]
 				},
 				"techniqueOther": {
 					"description": "If Technique is Other, list the technique used.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"Abstract": {
 					"description": "Additional descriptive information about the dataset, including a brief description and the context in which it was created (e.g., aim of the experiment, what the dataset is expected to show). This abstract will be used on the Digital Object Identifier (DOI) landing page and will be the primary description of the dataset; ideally 100+ words.",
@@ -775,11 +859,11 @@
 				},
 				"Methods": {
 					"description": "Additional descriptive information about how the biological materials were processed by the laboratories involved. May be used to describe the methodology (or protocols) used.",
-					"type": "string"
+					"type": ["string", "null"]
 				},
 				"technicalInfo": {
 					"description": "Additional descriptive information about how the data was processed computationally by the laboratories involved. May be used to describe the computational processing done with software versions and parameters. ",
-					"type": "string"
+					"type": ["string", "null"]
 				}
 			},
 			"allOf": [
