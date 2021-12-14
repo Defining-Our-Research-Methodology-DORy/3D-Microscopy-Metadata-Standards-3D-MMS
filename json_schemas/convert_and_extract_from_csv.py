@@ -1,4 +1,3 @@
-import pandas as pd
 import regex as re
 import json
 import numpy as np
@@ -6,82 +5,151 @@ import numpy as np
 import pandas as pd
 
 
-input_excel_file = "input_files/brain_microscopy_metadata_entry_template.xlsm"
+def split_csv(val):
+    """
+    Split the field by parentheses or comma
+    :param val: string value to be split
+    :return:
+    """
+    p = "\([^\)\(]*\)"  # matches sets of parentheses
+    if type(val) != str:
+        return val
+    matches = re.findall(p, val) # find all sets of parentheses
+    num_matches = len(matches)
 
-df = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2)
-for key in df.keys():
-    if key=="README":
-        continue
-    else:
-        df[key].to_csv(f'output_files/120321/{key}_120321.csv', index=False)
-        
+    if num_matches == 0: # if there are no parentheses, split using a ","
+        split_val = val.split(',')
+    elif num_matches == 1: # if there is one set of parentheses, remove the parentheses and split using a ","
+        split_val = val[1:-1].split(',')
+    elif num_matches > 1: # if there are multiple sets of parentheses, split on the parentheses
+        split_val = list(matches)
+
+    for j, k in enumerate(split_val): # for each element in split_val
+        try:
+            split_val[j] = float(k) # try to convert to a float
+        except:
+            split_val[j] = split_val[j].strip() # if you can't convert to a float strip white space from the string
+    return split_val
+
+def extract_csvs(input_excel_file):
+    """
+    Save the input excel file as csv files, with a separate csv file for each group
+    :param input_excel_file:
+    :return:
+    """
+    excel_dict = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2)
+    for sheet in excel_dict.keys():
+        if sheet == "README" or sheet == "dropdown":
+            continue
+        else:
+            # df[key].to_csv(f'output_files/120321/{key}_120321.csv', index=False)
+            output_file = f'brain-metadata-validation/json_schemas/output_files/121421/{sheet.lower()}_121421.csv'
+            with open(output_file, 'w+') as f:
+                excel_dict[sheet].to_csv(f, index=False)
+
+
+def add_new_datasets(record, dataset_ids, record_components):
+    """
+    Add a new dataset to the record dict for each dataset_id.
+    :param record: record to be added to
+    :param dataset_ids: list of dataset_ids in the csv file
+    :param record_components: list of columns (information fields) in the csv file
+    :return:
+    """
+    for id in dataset_ids:
+        if id in record.keys():
+            pass
+        else:
+            record[id] = {}
+            for c in record_components:
+                record[id][c] = []
+    return record
+
 # Read in component csv files and convert to a record in dictionary format
+record_components = ['Contributors', 'Publications', 'Funders', 'Instrument', 'Dataset', "Specimen", "Image"]
 
 record = {}
 
-# =========== List Components =============
-list_record_components = ['Contributors', 'Publications', 'Funders'] # components that allow multiple entries (multiple contributors, funders, etc.)
-object_record_components = ['Instrument', 'Dataset', "Specimen", "Image"] # components that do not allow multiple entries (instrument, etc.)
+# ==================== Go through csv files and extract information ==================================
+for c in record_components:
 
-for c in list_record_components + object_record_components:
-    # df = pd.read_csv(f"input_files/BIL_DOI_datasets_MM_{c.lower()}.csv")
-    df = pd.read_csv(f"output_files/120321/{c.lower()}_120321.csv")
-    object_list = [] # keeps track of record entries
+    df = pd.read_csv(f"brain-metadata-validation/json_schemas/output_files/121421/{c.lower()}_121421.csv")
 
-    arrayCols = [re.search('^[a-zA-Z]*', x)[0] for x in df.columns if re.search('array$', x)] # identify columns which are arrays (can have multiple values)
-    csvCols = [re.search('^[a-zA-Z]*', x)[0] for x in df.columns if re.search('csv$', x)]
+    # clean up the tables and identify the unique id column if there is one
+    csvCols = [x.split('+')[0] for x in df.columns if '+' in x] # list of columns that can have multiple entries
     df.columns = [re.search('^[a-zA-Z1-9]*', x)[0] for x in df.columns] # clean up column names
+    df.dropna(how="all", inplace=True)
+    group_id_rows = [col for col in df.columns if (re.search('[^k]Name$', col) or re.search('relatedIdentifier$', col))] # identify unique id column
 
-    id_col = [col for col in df.columns if (re.search('Name$', col) or re.search('relatedIdentifier$', col))] # identify the unique id column if there is one
-    if len(id_col) == 1:
-        id_col = id_col[0]
+    dataset_ids = list(set(df['datasetID']))
+    record = add_new_datasets(record, dataset_ids, record_components) # create the record dictionary
+
+    # Set group_id
+    if len(group_id_rows) == 1: # if a unique identifier is found
+        group_id_col = group_id_rows[0]
     else:
-        id_col = None
-    used_ids = {} # keeps tracked of existing unique identifiers
+        group_id_col = None
+        group_id = None
+    used_ids = {} # keeps tracked of existing group unique identifiers
 
-    # create a dict for each row (entry) in the df and add it to a list
+    # Create a dict for each row (entry) in the df and add it to a list
     for i in range(len(df)): # Go through rows in dataframe
-        record_dict = df.iloc[i].to_dict() # current row represented as a dictionary
+        row_dict = df.iloc[i].to_dict() # current row represented as a dictionary
+        dataset_id = row_dict['datasetID']
+
+        # Set group id if there is one
+        if group_id_col is not None:
+            group_id = row_dict[group_id_col]
+
+        # Format data in row_dict
         for col in df.columns:
 
+            # Convert fields to float if possible
             try:
-                record_dict[col] = float(record_dict[col])
+                row_dict[col] = float(row_dict[col])
             except:
                 pass
-            # print(record_dict[col], type(record_dict[col]))
-            if type(record_dict[col]) not in [str, list] and record_dict[col] is not None and np.isnan(record_dict[col]):
-                record_dict[col] = None
-            if col in csvCols:
-                record_dict[col] = record_dict[col].split('|')
-                for j,k in enumerate(record_dict[col]):
-                    try:
-                        record_dict[col][j] = float(k)
-                    except:
-                        pass
-            if col in arrayCols:
-                record_dict[col] = [record_dict[col]]
+
+            # convert NaNs to None
+            if type(row_dict[col]) not in [str, list] and row_dict[col] is not None and np.isnan(
+                    row_dict[col]):
+                row_dict[col] = None
+
+            # Split the values by column if the column is a csv column
+            if col in csvCols and row_dict[col] != None:
+                split_val = split_csv(row_dict[col])
+                row_dict[col] = split_val
+            elif col in csvCols and row_dict[col] == None:
+                row_dict[col] = []
 
 
-        if id_col is not None and record_dict[id_col] in used_ids.keys():  # If tan entry with the same id already exists
-            # Append information in the array columns to an existing entry
-            for col in arrayCols:
-                object_list[used_ids[record_dict[id_col]]][col] += record_dict[col]
-                object_list[used_ids[record_dict[id_col]]][col] = list(set(object_list[used_ids[record_dict[id_col]]][col]))
-
-        elif id_col is not None and record_dict[id_col] not in used_ids.keys():  # add id to used_ids
-            object_list.append(record_dict)
-            used_ids[record_dict[id_col]] = len(object_list) - 1
+        if group_id is not None:
+            # If there is an existing entry for the group_id
+            # Go through column by column and append values to the record dict
+            if group_id in used_ids.keys():  # If an entry with the same id already exists
+                for col in csvCols:
+                    record[dataset_id][c][used_ids[group_id]][col] += row_dict[col]
+                    record[dataset_id][c][used_ids[group_id]][col] = list(
+                        set(record[dataset_id][c][used_ids[group_id]][col]))
+            # If there is not entry for group_id
+            # Append the entire dictionary to the record dict
+            else:
+                if group_id not in used_ids.keys():  # add id to used_ids
+                    used_ids[group_id] = i
+                    record[dataset_id][c].append(row_dict)
+        # If there is no unique id column - add the entire row_dict to the record dict (append or create a new list)
         else:
-            object_list.append(record_dict)
+            try:
+                record[dataset_id][c].append(row_dict)
+            except:
+                record[dataset_id][c] = [row_dict]
 
-    if c in list_record_components:
-        record[c] = object_list
-    if c in object_record_components:
-        record[c] = object_list[0]
 
-with open("output_files/BIL_DOI_datasets_MM_120321.json", "w") as f:
+with open("brain-metadata-validation/json_schemas/output_files/121421/BIL_DOI_datasets_MM_121421.json", "w") as f:
     json.dump(record, f)
 
 with open("output_files/BIL_DOI_datasets_MM_112321_2.json", "r") as f:
     r = json.load(f)
 
+# ============ Extract csv files from excel template ==========
+input_excel_file = "brain-metadata-validation/json_schemas/input_files/brain_microscopy_metadata_entry_template.xlsm"
