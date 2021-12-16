@@ -1,16 +1,22 @@
 import regex as re
 import json
 import numpy as np
-import datetime
 import pandas as pd
 import os
-
+# ========================================== Functions ===========================================
+'''
+This script takes an input data entry excel file containing metadata for the BRAIN project and splits it into individual 
+csv files for each metadata group (Contributors, Funders, etc.). The individual csv files are then parsed and converted
+into a dictionary representation of the metadata record which is then written to a json file. The json file can be
+validated against record_schema.json.
+Data entry file: brain-metadata-validation/json_schemas/input_files/brain_microscopy_metadata_entry_template.xlsm 
+'''
 # ========================================== Functions ===========================================
 def split_csv(val):
     """
-    Split the field by parentheses or comma
-    :param val: string value to be split
-    :return:
+    Split a string by parentheses or commas
+    :param val (str, req): string value to be split
+    :return: input string split into a list
     """
     p = "\([^\)\(]*\)"  # matches sets of parentheses
     if type(val) != str:
@@ -37,11 +43,9 @@ def extract_csvs(input_excel_file, datestamp):
     Save the input excel file as csv files, with a separate csv file for each group. The current date is added to
     the filenames and files are saved in a directory name being the current date.
     :param input_excel_file: excel file to extract metadata from
-    :return:
+    :return: None
     """
     excel_dict = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2)
-
-
     path = f'brain-metadata-validation/json_schemas/output_files/{datestamp}'
 
     if not os.path.exists(path):
@@ -56,24 +60,33 @@ def extract_csvs(input_excel_file, datestamp):
                 excel_dict[sheet].to_csv(f, index=False)
 
 
-def add_new_datasets(record, dataset_ids, record_components):
+def add_new_datasets(metadata_record, dataset_ids, metadata_components):
     """
     Add a new dataset to the record dict for each dataset_id.
-    :param record: record to be added to
+    :param metadata_record: metadata record to be added to
     :param dataset_ids: list of dataset_ids in the csv file
-    :param record_components: list of columns (information fields) in the csv file
-    :return:
+    :param metadata_components: list of columns (information fields) in the csv file
+    :return: metadata_record dictionary
     """
     for id in dataset_ids:
-        if id in record.keys():
+        if id in metadata_record.keys():
             pass
         else:
-            record[id] = {}
-            for c in record_components:
-                record[id][c] = []
-    return record
+            metadata_record[id] = {}
+            for c in metadata_components:
+                metadata_record[id][c] = []
+    return metadata_record
 
 def parse_row(df, i, group_id_col, csvCols):
+    '''
+    Go through a single row in a csv file and parse the information into a dictionary. Also, get the
+    dataset_id and group_id for the row
+    :param df: dataframe to be parsed
+    :param i: row to be parsed
+    :param group_id_col: column name for the unique identifier for the group
+    :param csvCols: list of columns that can contain multiple values
+    :return: dictionary with information from the row (row_dict) as well as the dataset and group ids
+    '''
     row_dict = df.iloc[i].to_dict()  # current row represented as a dictionary
     dataset_id = row_dict['datasetID']
 
@@ -85,17 +98,14 @@ def parse_row(df, i, group_id_col, csvCols):
 
     # Format data in row_dict
     for col in df.columns:
-        print (col)
-        # Convert fields to float if possible
         try:
-            row_dict[col] = float(row_dict[col])
+            row_dict[col] = float(row_dict[col]) # Convert fields to float if possible
         except:
             pass
 
         # convert NaNs to None
         if type(row_dict[col]) not in [str, list] and row_dict[col] is not None and np.isnan(
                 row_dict[col]):
-            print('converting to None')
             row_dict[col] = None
 
         # Split the values by column if the column is a csv column
@@ -106,15 +116,23 @@ def parse_row(df, i, group_id_col, csvCols):
             row_dict[col] = []
     return row_dict, dataset_id, group_id
 
-def clean_df(df):
-    # clean up the tables and identify the unique id column if there is one
+def clean_col_names(df):
+    """
+    Clean up the dataframe names and identify the csv columns and unique id column if there is one
+    :param df: dataframe to be modified
+    :return: dataframe with cleaned column names and a list of columns which ae allowed to have multiple values (csvCols)
+    """
     csvCols = [x.split('+')[0] for x in df.columns if '+' in x]  # list of columns that can have multiple entries
     df.columns = [re.search('^[a-zA-Z1-9]*', x)[0] for x in df.columns]  # clean up column names
     df.dropna(how="all", inplace=True)
     return df, csvCols
 
 def get_group_id(df):
-
+    """
+    Get group ids and dataset ids that are in the input dataframe
+    :param df: input dataframe
+    :return: Column name for the group_id and dataset_ids contained in the df
+    """
     group_id_rows = [col for col in df.columns if
                      (re.search('[^k]Name$', col) or re.search('relatedIdentifier$', col))]  # identify unique id column
     dataset_ids = list(set(df['datasetID']))
@@ -128,14 +146,21 @@ def get_group_id(df):
 
 
 def parse_group_csv(metadata_group, metadata_groups):
-    # Read in component csv file and convert to a record in dictionary format
+    """
+    Parse the csv file for a metadata group (Contributors, Funders, etc.) and return a dictionary containing
+    the information in the csv file
+    :param metadata_group: Group name for the metadata group being processed
+    :param metadata_groups: List of all metadata groups
+    :return: dictionary containing the information in the csv file for the specified metadata group
+    """
+    # Read in component csv file and convert to a metadata_record in dictionary format
     df = pd.read_csv(
         f"brain-metadata-validation/json_schemas/output_files/{datestamp}/{metadata_group.lower()}_{datestamp}.csv")
-    record = {}
-    df, csvCols = clean_df(df)
+    metadata_record = {}
+    df, csvCols = clean_col_names(df)
     group_id_col, dataset_ids = get_group_id(df)
 
-    record = add_new_datasets(record, dataset_ids, metadata_groups)  # create the record dictionary
+    metadata_record = add_new_datasets(metadata_record, dataset_ids, metadata_groups)  # create the metadata_record dictionary
     used_ids = {}  # keeps tracked of existing group unique identifiers
 
     # Create a dict for each row (entry) in the df and add it to a list
@@ -143,40 +168,55 @@ def parse_group_csv(metadata_group, metadata_groups):
         row_dict, dataset_id, group_id = parse_row(df, i, group_id_col, csvCols)
 
         if group_id is not None:
-            # If there is an existing entry for the group_id, go through column by column and append values to the record dict
+            # If there is an existing entry for the group_id, go through column by column and append values to the metadata_record dict
             if group_id in used_ids.keys():  # If an entry with the same id already exists
                 for col in csvCols:
-                    record[dataset_id][metadata_group][used_ids[group_id]][col] += row_dict[col]
-                    record[dataset_id][metadata_group][used_ids[group_id]][col] = list(
-                        set(record[dataset_id][metadata_group][used_ids[group_id]][col]))
-            # If there is not entry for group_id, append the entire dictionary to the record dict
+                    metadata_record[dataset_id][metadata_group][used_ids[group_id]][col] += row_dict[col]
+                    metadata_record[dataset_id][metadata_group][used_ids[group_id]][col] = list(
+                        set(metadata_record[dataset_id][metadata_group][used_ids[group_id]][col]))
+            # If there is not entry for group_id, append the entire dictionary to the metadata_record dict
             else:
                 if group_id not in used_ids.keys():  # add id to used_ids
                     used_ids[group_id] = i
-                    record[dataset_id][metadata_group].append(row_dict)
+                    metadata_record[dataset_id][metadata_group].append(row_dict)
 
-        # If there is no unique id column, add the entire row_dict to the record dict (append or create a new list)
+        # If there is no unique id column, add the entire row_dict to the metadata_record dict (append or create a new list)
         else:
             try:
-                record[dataset_id][metadata_group].append(row_dict)
+                metadata_record[dataset_id][metadata_group].append(row_dict)
             except:
-                record[dataset_id][metadata_group] = [row_dict]
+                metadata_record[dataset_id][metadata_group] = [row_dict]
 
-    return record
+    return metadata_record
 
 def parse_csvs():
+    """
+    Cycle through the metadata_groups and parse each corresponding csv file into a metadata_record dictionary.
+    :return: dictionary with the metadata from all of the groups.
+    """
     metadata_groups= ['Contributors', 'Publications', 'Funders', 'Instrument', 'Dataset', "Specimen", "Image"]
     for c in metadata_groups:
-        record = parse_group_csv(c, metadata_groups)
-    return record
+        metadata_record = parse_group_csv(c, metadata_groups)
+    return metadata_record
 
-def write_json(record, datestamp):
+def write_json(metadata_record, datestamp):
+    """
+    Write the metadata record to a json file.
+    :param metadata_record: metadata record to be written
+    :param datestamp: date stamp to be used in the json file name.
+    :return: None
+    """
     with open(
             f"brain-metadata-validation/json_schemas/output_files/{datestamp}/BIL_DOI_datasets_MM_{datestamp}.json",
             "w") as f:
-        json.dump(record, f)
+        json.dump(metadata_record, f)
 
 def read_json(date_stamp):
+    """
+    Load a json file containing a metadata record dictionary
+    :param date_stamp: data stamp for the json file name
+    :return: metadata record dictionary from the file
+    """
     with open(f"brain-metadata-validation/json_schemas/output_files/{date_stamp}/BIL_DOI_datasets_MM_{date_stamp}.json", "r") as f:
         r = json.load(f)
     return r
