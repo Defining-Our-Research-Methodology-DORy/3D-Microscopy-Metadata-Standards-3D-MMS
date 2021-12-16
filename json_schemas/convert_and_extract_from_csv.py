@@ -3,7 +3,7 @@ import json
 import numpy as np
 import pandas as pd
 import os
-# ========================================== Functions ===========================================
+# ========================================== Script Information ===========================================
 '''
 This script takes an input data entry excel file containing metadata for the BRAIN project and splits it into individual 
 csv files for each metadata group (Contributors, Funders, etc.). The individual csv files are then parsed and converted
@@ -137,7 +137,7 @@ def get_group_id(df):
                      (re.search('[^k]Name$', col) or re.search('relatedIdentifier$', col))]  # identify unique id column
     dataset_ids = list(set(df['datasetID']))
 
-    # Set group_id
+    # Identify the column containing the unique identifier for the metadata group
     if len(group_id_rows) == 1:  # if a unique identifier is found
         group_id_col = group_id_rows[0]
     else:
