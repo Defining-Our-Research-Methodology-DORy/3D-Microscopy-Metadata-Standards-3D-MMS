@@ -3,6 +3,18 @@ import regex as re
 import json
 import numpy as np
 
+import pandas as pd
+
+
+input_excel_file = "input_files/brain_microscopy_metadata_entry_template.xlsm"
+
+df = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2)
+for key in df.keys():
+    if key=="README":
+        continue
+    else:
+        df[key].to_csv(f'output_files/120321/{key}_120321.csv', index=False)
+
 # Read in component csv files and convert to a record in dictionary format
 
 record = {}
@@ -12,7 +24,8 @@ list_record_components = ['Contributors', 'Publications', 'Funders'] # component
 object_record_components = ['Instrument', 'Dataset', "Specimen", "Image"] # components that do not allow multiple entries (instrument, etc.)
 
 for c in list_record_components + object_record_components:
-    df = pd.read_csv(f"input_files/BIL_DOI_datasets_MM_{c.lower()}.csv")
+    # df = pd.read_csv(f"input_files/BIL_DOI_datasets_MM_{c.lower()}.csv")
+    df = pd.read_csv(f"output_files/120321/{c.lower()}_120321.csv")
     object_list = [] # keeps track of record entries
 
     arrayCols = [re.search('^[a-zA-Z]*', x)[0] for x in df.columns if re.search('array$', x)] # identify columns which are arrays (can have multiple values)
@@ -66,7 +79,7 @@ for c in list_record_components + object_record_components:
     if c in object_record_components:
         record[c] = object_list[0]
 
-with open("output_files/BIL_DOI_datasets_MM_120121.json", "w") as f:
+with open("output_files/BIL_DOI_datasets_MM_120321.json", "w") as f:
     json.dump(record, f)
 
 with open("output_files/BIL_DOI_datasets_MM_112321_2.json", "r") as f:

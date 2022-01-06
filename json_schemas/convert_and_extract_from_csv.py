@@ -129,7 +129,7 @@ def clean_col_names(df):
 
 def get_group_id(df):
     """
-    Get group ids and dataset ids that are in the input dataframe
+    Get group ids and dataset ids in the input dataframe
     :param df: input dataframe
     :return: Column name for the group_id and dataset_ids contained in the df
     """
