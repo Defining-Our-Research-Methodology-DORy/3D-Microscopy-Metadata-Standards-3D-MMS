@@ -145,7 +145,7 @@ def get_group_id(df):
     return group_id_col, dataset_ids
 
 
-def parse_group_csv(metadata_group, metadata_groups):
+def parse_group_csv(metadata_record, metadata_group, metadata_groups):
     """
     Parse the csv file for a metadata group (Contributors, Funders, etc.) and return a dictionary containing
     the information in the csv file
@@ -156,7 +156,7 @@ def parse_group_csv(metadata_group, metadata_groups):
     # Read in component csv file and convert to a metadata_record in dictionary format
     df = pd.read_csv(
         f"brain-metadata-validation/json_schemas/output_files/{datestamp}/{metadata_group.lower()}_{datestamp}.csv")
-    metadata_record = {}
+    # metadata_record = {}
     df, csvCols = clean_col_names(df)
     group_id_col, dataset_ids = get_group_id(df)
 
@@ -195,8 +195,10 @@ def parse_csvs():
     :return: dictionary with the metadata from all of the groups.
     """
     metadata_groups= ['Contributors', 'Publications', 'Funders', 'Instrument', 'Dataset', "Specimen", "Image"]
+    metadata_record = {}
     for c in metadata_groups:
-        metadata_record = parse_group_csv(c, metadata_groups)
+        # metadata_record = parse_group_csv(c, metadata_groups)
+        metadata_record = parse_group_csv(metadata_record, c, metadata_groups)
     return metadata_record
 
 def write_json(metadata_record, datestamp):
@@ -226,7 +228,9 @@ def read_json(date_stamp):
 today = pd.to_datetime("today")
 datestamp = f'{today.month}{today.day}{today.year}'
 
-input_excel_file = "brain-metadata-validation/json_schemas/input_files/brain_microscopy_metadata_entry_template.xlsm"
+# input_excel_file = "brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
+input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw.xlsm"
+input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw_mm.xlsm"
 extract_csvs(input_excel_file, datestamp)
 
 # =========================== Go through csv files and extract information ==================================
