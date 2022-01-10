@@ -16,7 +16,7 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "fundingReferenceIdentifierType": {
                 "description": "The Identifying scheme used in fundingReferenceIdentifier.",
@@ -24,21 +24,21 @@
                 "items": {
                     "type": "string",
                     "enum": ["GRID", "ISNI", "ORCID", "ROR", "RRID"]
-                },
+                }
             },
             "awardNumber": {
                 "description": "Funding code or project number assigned to the grant.",
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "awardTitle": {
                 "description": "Title of the grant award.",
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "NIH": {
                 "description": "Is this an NIH project?",
@@ -60,7 +60,7 @@
         "else": {
             "required": []
         }
-    },
+    }
 
 
 }

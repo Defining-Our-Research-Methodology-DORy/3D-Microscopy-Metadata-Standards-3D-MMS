@@ -3,6 +3,10 @@ import json
 import numpy as np
 import pandas as pd
 import os
+
+from jsonschema import validate, exceptions
+from jsonschema.validators import Draft7Validator
+
 # ========================================== Script Information ===========================================
 '''
 This script takes an input data entry excel file containing metadata for the BRAIN project and splits it into individual 
@@ -45,7 +49,7 @@ def extract_csvs(input_excel_file, datestamp):
     :param input_excel_file: excel file to extract metadata from
     :return: None
     """
-    excel_dict = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2)
+    excel_dict = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2, engine="openpyxl")
     path = f'brain-metadata-validation/json_schemas/output_files/{datestamp}'
 
     if not os.path.exists(path):
@@ -56,7 +60,7 @@ def extract_csvs(input_excel_file, datestamp):
             continue
         else:
             output_file = f'{path}/{sheet.lower()}_{datestamp}.csv'
-            with open(output_file, 'w+') as f:
+            with open(output_file, 'w+', encoding="utf-8") as f:
                 excel_dict[sheet].to_csv(f, index=False)
 
 
@@ -155,7 +159,7 @@ def parse_group_csv(metadata_record, metadata_group, metadata_groups):
     """
     # Read in component csv file and convert to a metadata_record in dictionary format
     df = pd.read_csv(
-        f"brain-metadata-validation/json_schemas/output_files/{datestamp}/{metadata_group.lower()}_{datestamp}.csv")
+        f"brain-metadata-validation/json_schemas/output_files/{datestamp}/{metadata_group.lower()}_{datestamp}.csv", encoding="utf-8")
     # metadata_record = {}
     df, csvCols = clean_col_names(df)
     group_id_col, dataset_ids = get_group_id(df)
@@ -219,20 +223,41 @@ def read_json(date_stamp):
     :param date_stamp: data stamp for the json file name
     :return: metadata record dictionary from the file
     """
-    with open(f"brain-metadata-validation/json_schemas/output_files/{date_stamp}/BIL_DOI_datasets_MM_{date_stamp}.json", "r") as f:
+    with open(f"brain-metadata-validation/json_schemas/output_files/{date_stamp}/BIL_DOI_datasets_MM_{date_stamp}.json", "r", encoding="utf-8") as f:
         r = json.load(f)
     return r
 
+def load_schema(category):
+    with open("json_schemas/schemas/"+category+"_schema.json", "r") as f:
+        schema = json.load(f)
+
+    return schema
 
 # =========================== Extract csv files from excel template ===========================================
 today = pd.to_datetime("today")
 datestamp = f'{today.month}{today.day}{today.year}'
 
 # input_excel_file = "brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
-input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw.xlsm"
-input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw_mm.xlsm"
+input_excel_file = "json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
+# input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw_mm.xlsm"
 extract_csvs(input_excel_file, datestamp)
 
 # =========================== Go through csv files and extract information ==================================
 metadata_record = parse_csvs()
 write_json(metadata_record, datestamp)
+
+# =========================== Run json validation on metadata record =======================================
+schema = load_schema('record')
+
+print(f'Validating submitted instance for category: "record"...')
+
+try:
+    validate(instance=metadata_record, schema=schema)
+    print('No errors found')
+except exceptions.ValidationError:
+    v = Draft7Validator(schema)
+    tree = exceptions.ErrorTree(v.iter_errors(metadata_record))
+    error_list = sorted(v.iter_errors(metadata_record), key=str)
+    print(f"Validation error(s) found: {len(error_list)}")
+    for error in error_list:
+        print(error.message)

@@ -13,7 +13,7 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
 
             },
             "relatedIdentifierType": {
@@ -22,7 +22,7 @@
                 "items": {
                     "type": "string",
                     "enum": ["arXiv", "DOI", "ISBN", "PMID"]
-                },
+                }
 
             },
             "PMCID": {
@@ -30,7 +30,7 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
 
             },
             "relationType": {
@@ -39,13 +39,13 @@
                 "items": {
                     "type": "string",
                     "enum": ["IsCitedBy", "IsDocumentedBy"]
-                },
+                }
             },
             "Citation": {
                 "description": "Complete citation for the publication or other related information.",
                 "type": "string"
             }
         },
-    "additionalProperties": false,
+    "additionalProperties": false
     }
 }

@@ -24,7 +24,7 @@
                 "items": {
                     "type": "string",
                     "enum": ["ContactPerson", "DataCollector", "DataCurator", "ProjectLeader", "ProjectManager", "ProjectMember", "RelatedPerson", "Researcher", "ResearchGroup", "Other"]
-                },
+                }
                             },
             "nameType": {
                 "description": "Type of contributor.",
@@ -32,14 +32,14 @@
                 "items": {
                     "type": "string",
                     "enum": ["Organizational", "Personal"]
-                },
+                }
             },
             "nameIdentifier": {
                 "description": "Alphanumeric code that uniquely identifies an individual or legal entity, (listed in the contributorName field). Accepted identifiers include GRID, ISNI, ORCID, ROR, and RRID. Preferred identifiers are ORCID for personal names and ROR for organizational names.",
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "nameIdentifierScheme": {
                 "description": "Identifying scheme used in nameIdentifier.",
@@ -47,7 +47,7 @@
                 "items": {
                     "type": "string",
                     "enum": ["GRID", "ISNI", "ORCID", "ROR", "RRID"]
-                },
+                }
 
             },
             "affiliation": {
@@ -55,14 +55,14 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "affiliationIdentifier": {
                 "description": "Unique identifier (ROR preferred) for the organizational or institutional affiliation of the contributor.",
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
 
             },
             "affiliationIdentifierScheme": {
@@ -71,7 +71,7 @@
                 "items": {
                     "type": "string",
                     "enum": ["GRID", "ISNI", "ORCID", "ROR", "RRID"]
-                },
+                }
             }
         },
         "if": {

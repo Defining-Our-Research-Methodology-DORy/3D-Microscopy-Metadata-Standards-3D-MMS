@@ -92,7 +92,7 @@
 						"type": "array",
 						"items": {
 							"type": "string"
-						},
+						}
 
 				},
 				"Representation": {
@@ -192,6 +192,6 @@
 						"then": {
 								"required": ["obliqueZDim1","obliqueZDim2","obliqueZDim3"]
 						}
-				},
+				}
 		]
 }

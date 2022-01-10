@@ -12,7 +12,7 @@
             },
             "microscopeManufacturerAndModel": {
                 "description": "Manufacturer and model of the microscope used.",
-                "type": "string",
+                "type": "string"
             },
             "objectiveManufacturerAndModel": {
                 "description": "Manufacturer and model of the lens used.",

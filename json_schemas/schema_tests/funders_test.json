@@ -21,7 +21,7 @@
 		"fundingReferenceIdentifier": ["id1", "id2"],
 		"fundingReferenceIdentifierType": ["GRID", "ROR"],
 		"awardNumber": ["Award1", "Award2"],
-		"awardTitle": ["This is my title 3", "another title"],
+		"awardTitle": ["This is my title 3", "another title"]
 	}
 }
 
