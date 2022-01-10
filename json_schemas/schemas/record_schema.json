@@ -612,7 +612,7 @@
               "dimensionOrder": {
                 "description": "XYZT, or whatever order is used.",
                 "type": [
-                  "number",
+                  "string",
                   "null"
                 ]
               }
