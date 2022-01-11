@@ -50,7 +50,7 @@ def extract_csvs(input_excel_file, datestamp):
     :return: None
     """
     excel_dict = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2, engine="openpyxl")
-    path = f'brain-metadata-validation/json_schemas/output_files/{datestamp}'
+    path = f'json_schemas/output_files/{datestamp}'
 
     if not os.path.exists(path):
         os.makedirs(path)
@@ -61,7 +61,10 @@ def extract_csvs(input_excel_file, datestamp):
         else:
             output_file = f'{path}/{sheet.lower()}_{datestamp}.csv'
             with open(output_file, 'w+', encoding="utf-8") as f:
-                excel_dict[sheet].to_csv(f, index=False)
+                output_df = excel_dict[sheet]
+                output_df.drop(output_df.filter(regex="Unname"),axis=1, inplace=True)
+                output_df = output_df[output_df['datasetID*'].notna()]
+                output_df.to_csv(f, index=False)
 
 
 def add_new_datasets(metadata_record, dataset_ids, metadata_components):
@@ -159,7 +162,7 @@ def parse_group_csv(metadata_record, metadata_group, metadata_groups):
     """
     # Read in component csv file and convert to a metadata_record in dictionary format
     df = pd.read_csv(
-        f"brain-metadata-validation/json_schemas/output_files/{datestamp}/{metadata_group.lower()}_{datestamp}.csv", encoding="utf-8")
+        f"json_schemas/output_files/{datestamp}/{metadata_group.lower()}_{datestamp}.csv", encoding="utf-8")
     # metadata_record = {}
     df, csvCols = clean_col_names(df)
     group_id_col, dataset_ids = get_group_id(df)
@@ -175,9 +178,10 @@ def parse_group_csv(metadata_record, metadata_group, metadata_groups):
             # If there is an existing entry for the group_id, go through column by column and append values to the metadata_record dict
             if group_id in used_ids.keys():  # If an entry with the same id already exists
                 for col in csvCols:
-                    metadata_record[dataset_id][metadata_group][used_ids[group_id]][col] += row_dict[col]
-                    metadata_record[dataset_id][metadata_group][used_ids[group_id]][col] = list(
-                        set(metadata_record[dataset_id][metadata_group][used_ids[group_id]][col]))
+                    if len(metadata_record[dataset_id][metadata_group]) > 0:
+                        metadata_record[dataset_id][metadata_group][used_ids[group_id]][col] += row_dict[col]
+                        metadata_record[dataset_id][metadata_group][used_ids[group_id]][col] = list(
+                            set(metadata_record[dataset_id][metadata_group][used_ids[group_id]][col]))
             # If there is not entry for group_id, append the entire dictionary to the metadata_record dict
             else:
                 if group_id not in used_ids.keys():  # add id to used_ids
@@ -213,7 +217,7 @@ def write_json(metadata_record, datestamp):
     :return: None
     """
     with open(
-            f"brain-metadata-validation/json_schemas/output_files/{datestamp}/BIL_DOI_datasets_MM_{datestamp}.json",
+            f"json_schemas/output_files/{datestamp}/BIL_DOI_datasets_MM_{datestamp}.json",
             "w") as f:
         json.dump(metadata_record, f)
 
@@ -223,7 +227,7 @@ def read_json(date_stamp):
     :param date_stamp: data stamp for the json file name
     :return: metadata record dictionary from the file
     """
-    with open(f"brain-metadata-validation/json_schemas/output_files/{date_stamp}/BIL_DOI_datasets_MM_{date_stamp}.json", "r", encoding="utf-8") as f:
+    with open(f"json_schemas/output_files/{date_stamp}/BIL_DOI_datasets_MM_{date_stamp}.json", "r", encoding="utf-8") as f:
         r = json.load(f)
     return r
 
@@ -237,8 +241,8 @@ def load_schema(category):
 today = pd.to_datetime("today")
 datestamp = f'{today.month}{today.day}{today.year}'
 
-# input_excel_file = "brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
-input_excel_file = "json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
+input_excel_file = "json_schemas/input_files/microscopy_metadata_entry_template_dnw.xlsm"
+# input_excel_file = "json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
 # input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw_mm.xlsm"
 extract_csvs(input_excel_file, datestamp)
 
