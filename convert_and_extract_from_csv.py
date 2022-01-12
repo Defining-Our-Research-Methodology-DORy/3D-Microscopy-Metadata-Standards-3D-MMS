@@ -246,7 +246,7 @@ with open('config.yaml', 'r') as ymlfile:
 parser = argparse.ArgumentParser(description='Run the conversion script.')
 parser.add_argument('-i', '--input_excel_file',
                     default=cfg['input_excel_file'],
-                    help='Tell which input excel file to convert.')
+                    help='Tell which input Excel file to convert.')
 
 args = parser.parse_args()
 input_excel_file = args.input_excel_file
