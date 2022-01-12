@@ -3,6 +3,8 @@ import json
 import numpy as np
 import pandas as pd
 import os
+import yaml
+import argparse
 
 from jsonschema import validate, exceptions
 from jsonschema.validators import Draft7Validator
@@ -237,14 +239,25 @@ def load_schema(category):
 
     return schema
 
+# =========================== Reading input parameters =======================================
+with open('config.yaml', 'r') as ymlfile:
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
+
+parser = argparse.ArgumentParser(description='Run the conversion script.')
+parser.add_argument('-i', '--input_excel_file',
+                    default=cfg['input_excel_file'],
+                    help='Tell which input excel file to convert.')
+
+args = parser.parse_args()
+input_excel_file = args.input_excel_file
+
 # =========================== Extract csv files from excel template ===========================================
 today = pd.to_datetime("today")
 datestamp = f'{today.month}{today.day}{today.year}'
 
-input_excel_file = "json_schemas/input_files/microscopy_metadata_entry_template_dnw.xlsm"
 # input_excel_file = "json_schemas/input_files/microscopy_metadata_entry_template.xlsm"
-# input_excel_file = "/Users/mmandal/Documents/projects/BRAIN/brain-metadata-validation/json_schemas/input_files/microscopy_metadata_entry_template_dnw_mm.xlsm"
-extract_csvs(input_excel_file, datestamp)
+input_excel_path = "json_schemas/input_files/" + input_excel_file
+extract_csvs(input_excel_path, datestamp)
 
 # =========================== Go through csv files and extract information ==================================
 metadata_record = parse_csvs()
