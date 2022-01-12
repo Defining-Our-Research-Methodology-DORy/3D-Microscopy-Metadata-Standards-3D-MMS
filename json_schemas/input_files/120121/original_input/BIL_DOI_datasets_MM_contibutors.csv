@@ -1,6 +1,0 @@
-﻿"Related Pre-Prints, Publications, and Protocols  associated with the dataset that have globally unique identifiers",,,,
-,,,,
-Publications,,,,
-relatedIdentifier,relatedIdentifierType,PMCID,relationType,citation
-A globally unique identifier to the related information.,"The type of descriptive identifier: arXiv - arXiv.org preprint id, DOI - Digital Object Identifier, PMID - Pubmed ID, ISBN - International Standard Book Number. (CV: arcXiv, DOI, PMID, ISBN) Recommended: DOI or PMID",Enter PubMed Central identifer if applicable,"The DataCite descriptive identifier identifying the relation. Recommended user identifiers to potentially use if relevant are: IsCitedBy (for publications), IsDocumentedBy (for protocols).",Complete citation for the work
-https://doi.org/10.1145/3219104.3229266,DOI,,IsCitedBy,"Sean Deitrich, Jacob Czech, Alexander Ropelewski, Arthur W. Wetzel, Greg Hood, Derek Simmel, Marcel Bruchez, Simon C. Watkins, and Alan M. Watson. 2018. Applying iRODS to the Brain Image Library. In Proceedings of the Practice and Experience on Advanced Research Computing (PEARC ’18). Association for Computing Machinery, New York, NY, USA, Article 79, 1–4. DOI:https://doi.org/10.1145/3219104.3229266"
