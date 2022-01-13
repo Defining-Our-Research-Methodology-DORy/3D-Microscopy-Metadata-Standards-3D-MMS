@@ -30,6 +30,13 @@ A `config.yaml` file is provided where a user can specify input files and catego
 
 Input files should be placed in the directory `json_schemas/input_files`.
 
+## BRAIN Image Data Input
+To add BRAIN image data, use the following steps:
+- navigate to `json_schemas/input_files`
+- make a copy of the Excel file `microscopy_metadata_entry_template.xlsm` and rename to something else
+- change the `input_excel_file` parameter above to this new name
+- open the new Excel file and follow instructions in the `README` sheet
+
 ## Data Conversion and Validation usage
 
 ### Purpose
