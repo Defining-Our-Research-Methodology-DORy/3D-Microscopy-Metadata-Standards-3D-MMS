@@ -1,0 +1,9 @@
+datasetID*,localID,Species*,NCBITaxonomy*,Age*,ageUnit*,Sex*,Genotype,organLocalID,organName,sampleLocalID,Atlas,Location
+ds1,M180517,Mouse,NCBI:txid10090,93,Days,Female,Strain_Name='C57BL6';Cre_Driver_Line='Pvalb';Reporter_Name='Ai75';,M180517,Brain,M180517,AllenMouseV2,MOp - Primary motor area
+ds2,M180300,Human,NCBI:txid10050,64,Years ,Male ,,M180800,Brain,M180852,AlanHuman34yrsWholeBrain,
+ds3,M180301,Human,NCBI:txid10051,64,Years ,Male ,,M180801,Brain,M180853,AlanHuman34yrsWholeBrain,
+ds3,M180302,Human,NCBI:txid10052,64,Years ,Unknown,,M180802,Brain,M180854,AlanHuman34yrsWholeBrain,
+ds3,M180303,Human,NCBI:txid10053,64,Years ,Female ,,M180803,Brain,M180855,AlanHuman34yrsWholeBrain,
+ds3,M180304,Human,NCBI:txid10054,64,Years ,Female ,,M180804,Brain,M180856,AlanHuman34yrsWholeBrain,
+ds3,M180305,Human,NCBI:txid10055,64,Years ,Male ,,M180805,Brain,M180857,AlanHuman34yrsWholeBrain,
+d4,M180306,Human,NCBI:txid10056,64,Years ,Unknown,,M180806,Brain,M180858,AlanHuman34yrsWholeBrain,

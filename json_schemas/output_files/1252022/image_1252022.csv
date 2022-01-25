@@ -1,0 +1,9 @@
+datasetID*,xAxis,obliqueXDim1**,obliqueXDim2**,obliqueXDim3**,yAxis,obliqueYDim1**,obliqueYDim2**,obliqueYDim3**,zAxis,obliqueZDim1**,obliqueZDim2**,obliqueZDim3**,landmarkName,landmarkX,landmarkY,landmarkZ,Number+*,displayColor+,Representation,Flurophore+,stepSizeX*,stepSizeY*,stepSizeZ,stepSizeT,Channel,Slices,t,xSize,ySize,zSize,Gbyte,File,dimensionOrder
+ds1,Oblique,Left,Posterior,Inferior,,,,,,,,,,,,,"1,2","(1.0, 0.0, 0.0),(0.0, 1.0, 0.0)",,"(tdTomato,EGFP)",100 micron,150 micron,,,2,1050,1,,,,,,
+ds2,Left-to-right,,,,,,,,,,,,,,,,"1,2,3","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),150 micron,300 micron,,,1,500,3,,,,,,
+ds3,Anterior-to-posterior ,Left,Anterior,Superior,,,,,,,,,,,,,"1,2,4","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),151 micron,301 micron,,,1,500,3,,,,,,
+ds3,Posterior-to-anterior ,Right,Posterior,Inferior,,,,,,,,,,,,,"1,2,5","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),152 micron,302 micron,,,1,500,3,,,,,,
+ds3,Left-to-right,Right,Posterior,Inferior,,,,,,,,,,,,,"1,2,6","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),153 micron,303 micron,,,1,500,3,,,,,,
+ds3,Oblique,Left,Anterior,Inferior,,,,,,,,,,,,,"1,2,7","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),154 micron,304 micron,,,1,500,3,,,,,,
+ds3,Left-to-right,Left,Anterior,Inferior,,,,,,,,,,,,,"1,2,8","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),155 micron,305 micron,,,1,500,3,,,,,,
+d4,Left-to-right,Left,Posterior,Inferior,,,,,,,,,,,,,"1,2,9","(1.0, 0.0, 1.0),(0.0, 1.0, 0.0)",,(EYFP),156 micron,306 micron,,,1,500,3,,,,,,

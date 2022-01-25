@@ -1,0 +1,9 @@
+datasetID*,microscopeType*,microscopeManufacturerAndModel*,objectiveManufacturerAndModel,objectiveImmersion,objectiveNA,objectiveMagnification,detectorType*,detectorManufacturerAndModel*,illuminationType*,illuminationWavelength*,detectionWavelength*,sampleTemperature
+ds1,Confocal,Caliber I.D. RS-G4 ,Nikkon 1000,Oil,,,PMT,Nikkon Detect 2000,Gas,400–850 nm,500–600 nm,
+ds2,LightSheet,Nikon 9000,Nikkon 9000a,Water,,,APD,Nikkon Detect 9000,FreeElectron,300–400 nm,300–400 nm,
+ds3,LightSheet,Nikon 9001,Nikkon 9000a,Water,,,APD,Nikkon Detect 9001,FreeElectron,300–400 nm,300–400 nm,
+ds3,LightSheet,Nikon 9002,Nikkon 9000a,Water,,,APD,Nikkon Detect 9002,FreeElectron,300–400 nm,300–400 nm,
+ds3,LightSheet,Nikon 9003,Nikkon 9000a,Water,,,APD,Nikkon Detect 9003,FreeElectron,300–400 nm,300–400 nm,
+ds3,LightSheet,Nikon 9004,Nikkon 9000a,Water,,,APD,Nikkon Detect 9004,FreeElectron,300–400 nm,300–400 nm,
+ds3,LightSheet,Nikon 9005,Nikkon 9000a,Water,,,APD,Nikkon Detect 9005,FreeElectron,300–400 nm,300–400 nm,
+d4,LightSheet,Nikon 9006,Nikkon 9000a,Water,,,APD,Nikkon Detect 9006,FreeElectron,300–400 nm,300–400 nm,
