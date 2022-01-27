@@ -15,8 +15,20 @@ The main branch is at version 1.0, as of November 19, 2021.
 
 ## Initialization
 
-### Python set up
-This code was written in Python (versions 3.6.8 and above).  The list of required Python packages is provided in `requirements.txt` and can be used to initialize an environment of the user's choice.
+### Python
+This code was written in Python 3 (versions 3.6.8 and above).
+
+The list of required Python packages is provided in `requirements.txt` and can be used to initialize an environment of the user's choice.  These can be installed using either of the following commands depending on your OS:
+
+Windows
+```
+pip install -r requirements.txt
+```
+
+Mac/Linux
+```
+pip3 install -r requirements.txt
+```
 
 ### Configuration file
 A `config.yaml` file is provided where a user can specify input files and categories for the Data Conversion and Validator scripts.  Parameters corresponding to each script are as follows:
