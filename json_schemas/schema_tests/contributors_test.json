@@ -5,7 +5,7 @@
 			"contributorType": ["Researcher"],
 			"nameType": ["Personal"],
 			"nameIdentifier": ["YN"],
-			"nameIdentifierScheme": ["GRID"],
+			"nameIdentifierScheme": ["GRIDWRONG"],
 			"affiliation": ["Also YN"],
 			"affiliationIdentifier": ["AYN"],
 			"affiliationIdentifierScheme": ["GRID"]
@@ -14,7 +14,7 @@
 			"contributorName": "Your Name 2",
 			"Creator": "Yes",
 			"contributorType": ["Researcher", "ProjectLeader"],
-			"nameType": ["Personal", "Organizational"],
+			"nameTypeWRONG": ["Personal", "Organizational"],
 			"nameIdentifier": ["YN"],
 			"nameIdentifierScheme": ["GRID", "ROR", "RRID"],
 			"affiliation": ["Also YN", "Another"],
