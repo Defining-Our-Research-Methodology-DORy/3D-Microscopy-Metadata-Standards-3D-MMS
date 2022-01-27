@@ -266,7 +266,17 @@ write_json(metadata_record, datestamp)
 # =========================== Run json validation on metadata record =======================================
 schema = load_schema('record')
 
-print(f'Validating submitted instance for category: "record"...')
+categories_dict = {
+    "Contributors": [ "datasetID", "contributorName", "Creator", "contributorType", "nameType", "nameIdentifier", "nameIdentifierScheme", "affiliation", "affiliationIdentifier", "affiliationIdentifierScheme" ],
+    "Dataset": [ "datasetID", "Title", "socialMedia", "Subject", "subjectScheme", "Rights", "rightsURI", "rightsIdentifier", "Image", "generalModality", "generalModalityOther", "Technique", "techniqueOther", "Abstract", "Methods", "technicalInfo" ],
+    "Funders": [ "datasetID", "funderName", "fundingReferenceIdentifier", "fundingReferenceIdentifierType", "awardNumber", "awardTitle" ],
+    "Image": [ "datasetID", "xAxis", "obliqueXDim1", "obliqueXDim2", "obliqueXDim3", "yAxis", "obliqueYDim1", "obliqueYDim2", "obliqueYDim3", "zAxis", "obliqueZDim1", "obliqueZDim2", "obliqueZDim3", "landmarkName", "landmarkX", "landmarkY", "landmarkZ", "Number", "displayColor", "Representation", "Flurophore", "stepSizeX", "stepSizeY", "stepSizeZ", "stepSizeT", "Channel", "Slices", "t", "xSize", "ySize", "zSize", "Gbyte", "File", "dimensionOrder" ],
+    "Instrument": [ "datasetID", "microscopeType", "microscopeManufacturerAndModel", "objectiveManufacturerAndModel", "objectiveImmersion", "objectiveNA", "objectiveMagnification", "detectorType", "detectorManufacturerAndModel", "illuminationType", "illuminationWavelength", "detectionWavelength", "sampleTemperature" ],
+    "Publications": [ "datasetID", "relatedIdentifier", "relatedIdentifierType", "PMCID", "relationType", "Citation" ],
+    "Specimen": [ "datasetID", "localID", "Species", "NCBITaxonomy", "Age", "ageUnit", "Sex", "Genotype", "organLocalID", "organName", "sampleLocalID", "Atlas", "Location" ]
+}
+
+print(f'\nValidating submitted instance for category: "record"...')
 
 try:
     validate(instance=metadata_record, schema=schema)
@@ -276,5 +286,14 @@ except exceptions.ValidationError:
     tree = exceptions.ErrorTree(v.iter_errors(metadata_record))
     error_list = sorted(v.iter_errors(metadata_record), key=str)
     print(f"Validation error(s) found: {len(error_list)}")
+    i = 1
     for error in error_list:
+        category = list(set(error.schema_path).intersection(list(categories_dict.keys())))[0]
+        property = list(set(error.schema_path).intersection(categories_dict[category]))
+        if len(property) == 0:
+            property = "missing"
+        print(f"\nError {i}:")
+        print(f"Category: {''.join(category)}")        
+        print(f"Property: {''.join(property)}")
         print(error.message)
+        i += 1
