@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "INSTRUMENT",
     "title": "Instrument",
     "description": "The Instrument category includes 12 metadata fields that describe the instrument.",
     "type": "object",

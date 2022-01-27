@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "DATASET",
     "title": "Dataset",
     "description": "The Dataset category includes 14 metadata fields that provide a high-level description of the data including title, abstract, methods, imaging modality, and how the data can be reused.",
 		"type": "object",

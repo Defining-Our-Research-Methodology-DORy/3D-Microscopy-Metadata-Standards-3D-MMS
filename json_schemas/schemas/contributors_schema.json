@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "CONTRIBUTORS",
     "title": "Contributors",
     "description": "The Contributors category includes nine metadata fields that identify and give credit to the scientists and organizations involved in the creation of the dataset.",
     "type": "array",

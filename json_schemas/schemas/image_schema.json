@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "IMAGE",
     "title": "Image",
     "description": "The Image category includes 33 metadata fields that describe the size and 3-dimensional orientation of the image, the channels and fluorophores used, and the location of relevant landmarks.",
 		"type": "object",

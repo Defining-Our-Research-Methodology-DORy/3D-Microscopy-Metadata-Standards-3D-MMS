@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "SPECIMEN",
     "title": "Specimen",
     "description": "The Specimen category includes 12 metadata fields that describe the donor, organ, and sample being studied.",
     "type": "object",
