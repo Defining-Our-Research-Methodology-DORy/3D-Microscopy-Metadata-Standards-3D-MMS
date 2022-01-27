@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "[unique_identifier_for_this_schema]",
+  "$id": "RECORD",
   "title": "Record",
   "description": "The schema for a 3D BRAIN Microscopy Record",
   "type": "object",
@@ -1024,7 +1024,7 @@
                 }
               }
             ]
-          },
+          }
 
         }
       },

@@ -1,2 +1,0 @@
-﻿localID,Species,NCBITaxonomy,Age,ageUnit,Sex,Genotype,organLocalID,organName,sampleLocalID,Atlas,Location
-M180517,Mouse,NCBI:txid10090,93,Days,Female,Strain_Name='C57BL6';Cre_Driver_Line='Pvalb';Reporter_Name='Ai75';,M180517,Brain,M180517,AllenMouseV2,MOp - Primary motor area

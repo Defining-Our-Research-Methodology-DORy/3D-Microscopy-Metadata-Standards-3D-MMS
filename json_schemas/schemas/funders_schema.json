@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "FUNDERS",
     "title": "Funders",
     "description": "The Funders category includes five metadata fields that describe the organizations providing financial support for the generation of the dataset.",
     "type": "array",
@@ -16,7 +16,7 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "fundingReferenceIdentifierType": {
                 "description": "The Identifying scheme used in fundingReferenceIdentifier.",
@@ -24,21 +24,21 @@
                 "items": {
                     "type": "string",
                     "enum": ["GRID", "ISNI", "ORCID", "ROR", "RRID"]
-                },
+                }
             },
             "awardNumber": {
                 "description": "Funding code or project number assigned to the grant.",
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "awardTitle": {
                 "description": "Title of the grant award.",
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
             },
             "NIH": {
                 "description": "Is this an NIH project?",
@@ -60,7 +60,7 @@
         "else": {
             "required": []
         }
-    },
+    }
 
 
 }

@@ -1,0 +1,12 @@
+datasetID*,contributorName*,Creator*,contributorType+*,nameType+*,nameIdentifier+**,nameIdentifierScheme+**,affiliation+*,affiliationIdentifier+*,affiliationIdentifierScheme+*
+ds1,"Ropelewski, Alexander",Yes,ProjectLeader,Personal,https://orcid.org/0000-0001-6874-4477,ORCID,Pittsburgh Supercomputing Center, https://ror.org/04tac1482,ROR
+ds1,Biomedical Applications Group,Yes,ResearchGroup,Organizational,,,Pittsburgh Supercomputing Center, https://ror.org/04tac1485,ROR
+ds1,Biomedical Applications Group,Yes,DataCollector,"Personal, Organizational",,,Pittsburgh Supercomputing Center, https://ror.org/04tac1488,ISNI
+ds2,Bioinformatics Group,Yes,"DataCollector, ProjectManager",Organizational,,,RTI International, https://ror.org/04tac1500,"ISNI, GRID"
+ds3,Bioinformatics Group,Yes,"ProjectLeader, ProjectMember",Organizational,,,RTI International, https://ror.org/04tac1501,"GRID, ISNI"
+ds3,Biomedical Applications Group,Yes,ProjectMember,Organizational,,,RTI International, https://ror.org/04tac1502,ISNI
+ds3,Biomedical Applications Group,Yes,DataCollector,Organizational,,,RTI International, https://ror.org/04tac1503,ROR
+ds3,Biomedical Applications Group,Yes,Researcher,Organizational,,,RTI International, https://ror.org/04tac1504,GRID
+ds3,Biomedical Applications Group,Yes,Researcher,Organizational,,,RTI International, https://ror.org/04tac1505,RRID
+ds3,Biomedical Applications Group,Yes,ResearchGroup,Organizational,,,RTI International, https://ror.org/04tac1506,ROR
+d4,Biomedical Applications Group,Yes,DataCollector,Organizational,,,RTI International, https://ror.org/04tac1507,ROR

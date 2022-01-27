@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "[unique_identifier_for_this_schema]",
+    "$id": "PUBLICATIONS",
     "title": "Publications",
     "description": "The Publication category includes five optional metadata fields that identify publications, pre-prints, and protocols that are related to the dataset. ",
     "type": "array",
@@ -13,7 +13,7 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
 
             },
             "relatedIdentifierType": {
@@ -22,7 +22,7 @@
                 "items": {
                     "type": "string",
                     "enum": ["arXiv", "DOI", "ISBN", "PMID"]
-                },
+                }
 
             },
             "PMCID": {
@@ -30,7 +30,7 @@
                 "type": "array",
                 "items": {
                     "type": "string"
-                },
+                }
 
             },
             "relationType": {
@@ -39,13 +39,13 @@
                 "items": {
                     "type": "string",
                     "enum": ["IsCitedBy", "IsDocumentedBy"]
-                },
+                }
             },
             "Citation": {
                 "description": "Complete citation for the publication or other related information.",
                 "type": "string"
             }
         },
-    "additionalProperties": false,
+    "additionalProperties": false
     }
 }
