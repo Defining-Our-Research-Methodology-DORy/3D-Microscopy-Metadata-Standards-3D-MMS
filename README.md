@@ -45,7 +45,7 @@ Input files should be placed in the directory `json_schemas/input_files`.
 ## BRAIN Image Data Input
 To add BRAIN image data, use the following steps:
 - navigate to `json_schemas/input_files`
-- make a copy of the Excel file `microscopy_metadata_entry_template.xlsm` and rename to something else
+- make a copy of the Excel file `microscopy_metadata_entry_template.xlsm` and rename to something else (suggested `microscopy_metadata_entry.xlsm`)
 - change the `input_excel_file` parameter above to this new name
 - open the new Excel file and follow instructions in the `README` sheet
 
