@@ -11,7 +11,7 @@ https://doryworkspace.org/metadata
 The research was supported by the National Institute Of Mental Health of the National Institute of Health under Award Number R24MH114683. The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health.
 
 ## Branch status
-The main branch is at version 1.0, as of November 19, 2021.
+The main branch is at version 1.0, as of January 28, 2022.
 
 ## Initialization
 
