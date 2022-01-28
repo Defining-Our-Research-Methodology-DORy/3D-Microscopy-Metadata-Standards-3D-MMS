@@ -5,6 +5,17 @@ import argparse
 from jsonschema import validate, exceptions
 from jsonschema.validators import Draft7Validator
 
+# ========================================== Script Information ===========================================
+'''
+This script takes an input JSON file containing metadata for a specified Category from the BRAIN project and validates
+that data against its corresponding JSON schema.  Any discrepancies between the metadata structure and its schema will
+be displayed on the command line as a ValidationError along with relevant info about where the issue is.
+The input JSON file should be placed in the directory below.
+Input JSON file directory: brain-metadata-validation/json_schemas/input_files
+
+'''
+
+# ========================================== Functions ===========================================
 def load_schema(category):
     with open("json_schemas/schemas/"+category+"_schema.json", "r") as f:
         schema = json.load(f)
@@ -13,11 +24,11 @@ def load_schema(category):
 
 def load_input_file(input_file_name):
     with open("json_schemas/schema_tests/"+input_file_name, "r") as f:
-        # print(f"Here is filename: {'json_schemas/schema_tests/'+input_file_name}")
         instance = json.load(f)
 
     return instance
 
+# =========================== Reading input parameters =======================================
 with open('config.yaml', 'r') as ymlfile:
     cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
@@ -45,6 +56,8 @@ input_file_name = args.input_file_name
 instance = load_input_file(input_file_name)
 schema = load_schema(input_category)
 
+# =========================== Initializing Category dict =======================================
+# creating a dictionary as "master" list with categories and their respective expected columns
 categories_dict = {
     "Contributors": [ "datasetID", "contributorName", "Creator", "contributorType", "nameType", "nameIdentifier", "nameIdentifierScheme", "affiliation", "affiliationIdentifier", "affiliationIdentifierScheme" ],
     "Dataset": [ "datasetID", "Title", "socialMedia", "Subject", "subjectScheme", "Rights", "rightsURI", "rightsIdentifier", "Image", "generalModality", "generalModalityOther", "Technique", "techniqueOther", "Abstract", "Methods", "technicalInfo" ],
@@ -55,6 +68,7 @@ categories_dict = {
     "Specimen": [ "datasetID", "localID", "Species", "NCBITaxonomy", "Age", "ageUnit", "Sex", "Genotype", "organLocalID", "organName", "sampleLocalID", "Atlas", "Location" ]
 }
 
+# =========================== Checking and returning any ValidationErrors =======================================
 print(f'\nValidating submitted instance for category: "{input_category}"...')
 
 try:
