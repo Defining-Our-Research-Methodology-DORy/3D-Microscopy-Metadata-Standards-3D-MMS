@@ -1,0 +1,17 @@
+  {
+		"Title": "title of a book",
+		"socialMedia": "title of a book",
+		"Subject": "classificationCode21",
+		"subjectScheme": "Allen Mouse Brain Atlas",
+		"Rights": "license45a",
+		"rightsURI": "https://spdx.org/licenses",
+		"rightsIdentifier": "SPDX90",
+		"Image": "imageExample",
+		"generalModality": "Other",
+        "generalModalityOther": "modality1",
+		"Technique": "Other",
+        "techniqueOther": "smFISH2",
+		"Abstract": "Pesticide (fenthion) which finds its way into water bodies, bring about physiological changes in aquatic animals, via histomorphology and histopathology of various tissues. In fishes, it induces disorders including hyposecretion of gonadotropin in the PPD and regression of gonads. Light microscopic studies were made on control and treated pituitary (gonadotropin secreting cells-GTH) and testis of Glossogobius giuris (HAM) during spawning phase after exposing them to different (0.05 to 0.5 ppm) sub-lethal concentration of fenthion for a short-term period (24 to 96 hrs). The results indicated alteration in normal histology of gonadotropin secreting cells and testis, reduction in number of sperms and degranulation of GTH cells under light microscopy. Degeneration and fragmentation of cytoplasmic organelles was noticed in GTH cells under electron microscope, with the increase in the sub-lethal concentration of fenthion. Significance of the results is discussed in detail in the manuscript.",
+		"Methods": "imaging method 2",
+		"technicalInfo": "version2",
+	}

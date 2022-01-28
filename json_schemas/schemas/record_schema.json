@@ -1,0 +1,1041 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "RECORD",
+  "title": "Record",
+  "description": "The schema for a 3D BRAIN Microscopy Record",
+  "type": "object",
+  "additionalProperties": false,
+  "patternProperties": {
+    "^.*$": {
+      "type": "object",
+      "properties": {
+
+        "Contributors": {
+          "description": "The Contributors category includes nine metadata fields that identify and give credit to the scientists and organizations involved in the creation of the dataset.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "datasetID": {
+          "description": "Unique identifier for a microscopy dataset",
+          "type": "string"
+        },
+              "contributorName": {
+                "description": "Person (last name, first name) or organization (e.g., research group, department, institution) contributing to or responsible for the project, but does not include funders of the project.",
+                "type": "string"
+              },
+              "Creator": {
+                "description": "Main researchers involved in producing the data. There must be at least one creator.",
+                "type": "string",
+                "enum": [
+                  "Yes",
+                  "No"
+                ]
+              },
+              "contributorType": {
+                "description": "Categorization of the role of the contributor. Recommended: ProjectLeader (for principal investigator), ResearchGroup (for lab, department, or division).",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "ContactPerson",
+                    "DataCollector",
+                    "DataCurator",
+                    "ProjectLeader",
+                    "ProjectManager",
+                    "ProjectMember",
+                    "RelatedPerson",
+                    "Researcher",
+                    "ResearchGroup",
+                    "Other"
+                  ]
+                }
+              },
+              "nameType": {
+                "description": "Type of contributor.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "Organizational",
+                    "Personal"
+                  ]
+                }
+              },
+              "nameIdentifier": {
+                "description": "Alphanumeric code that uniquely identifies an individual or legal entity, (listed in the contributorName field). Accepted identifiers include GRID, ISNI, ORCID, ROR, and RRID. Preferred identifiers are ORCID for personal names and ROR for organizational names.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "nameIdentifierScheme": {
+                "description": "Identifying scheme used in nameIdentifier.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "GRID",
+                    "ISNI",
+                    "ORCID",
+                    "ROR",
+                    "RRID"
+                  ]
+                }
+              },
+              "affiliation": {
+                "description": "Organizational or institutional affiliation of the contributor.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "affiliationIdentifier": {
+                "description": "Unique identifier (ROR preferred) for the organizational or institutional affiliation of the contributor.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "affiliationIdentifierScheme": {
+                "description": "Identifying scheme used in affiliationIdentifier.",
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "GRID",
+                    "ISNI",
+                    "ORCID",
+                    "ROR",
+                    "RRID"
+                  ]
+                }
+              }
+            },
+            "if": {
+              "properties": {
+                "nameType": {
+                  "const": "Personal"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "contributorName",
+                "Creator",
+                "contributorType",
+                "nameType",
+                "nameIdentifier",
+                "nameIdentifierScheme",
+                "affiliation",
+                "affiliationIdentifier",
+                "affiliationIdentifierScheme"
+              ]
+            },
+            "else": {
+              "required": [
+                "contributorName",
+                "Creator",
+                "contributorType",
+                "nameType",
+                "nameIdentifier",
+                "affiliation",
+                "affiliationIdentifier",
+                "affiliationIdentifierScheme"
+              ]
+            }
+          }
+        },
+        "Funders": {
+          "description": "The Funders category includes five metadata fields that describe the organizations providing financial support for the generation of the dataset.",
+          "type": "array",
+          "items": {
+            "Funder": {
+              "type": "object",
+              "properties": {
+                "datasetID": {
+                "description": "Unique identifier for a microscopy dataset",
+                "type": ["string", "number"]
+              },
+                "funderName": {
+                  "description": "Name of the funder.",
+                  "type": "string"
+                },
+                "fundingReferenceIdentifier": {
+                  "description": "Alphanumeric code that uniquely identifies an individual or legal entity. Preferred identifier is ROR. ",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "fundingReferenceIdentifierType": {
+                  "description": "The Identifying scheme used in fundingReferenceIdentifier.",
+                  "type": "array",
+                  "additionalProperties": false,
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "GRID",
+                      "ISNI",
+                      "ORCID",
+                      "ROR",
+                      "RRID"
+                    ]
+                  }
+                },
+                "awardNumber": {
+                  "description": "Funding code or project number assigned to the grant.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "awardTitle": {
+                  "description": "Title of the grant award.",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "NIH": {
+                  "description": "Is this an NIH project?",
+                  "type": "string",
+                  "enum": [
+                    "Yes",
+                    "No"
+                  ]
+                }
+              },
+              "additionalProperties": false,
+              "if": {
+                "properties": {
+                  "NIH": {
+                    "const": "Yes"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "funderName",
+                  "fundingReferenceIdentifier",
+                  "fundingReferenceIdentifierType",
+                  "awardNumber",
+                  "awardTitle"
+                ]
+              },
+              "else": {
+                "required": []
+              }
+            }
+          }
+        },
+        "Publications": {
+          "description": "The Publication category includes five optional metadata fields that identify publications, pre-prints, and protocols that are related to the dataset. ",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "datasetID": {
+                "description": "Unique identifier for a microscopy dataset",
+                "type": ["string", "number"]
+              },
+              "relatedIdentifier": {
+                "description": "Alphanumeric code that uniquely identifies the publication or other related information.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "relatedIdentifierType": {
+                "description": "Identifying scheme used in relatedIdentifier. Recommended: DOI, PMID.",
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "arXiv",
+                    "DOI",
+                    "ISBN",
+                    "PMID"
+                  ]
+                }
+              },
+              "PMCID": {
+                "description": "PubMed Central identifier (PMCID; if applicable).",
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "relationType": {
+                "description": "DataCite descriptive identifier specifying the relationship. Recommended: IsCitedBy (for publications), IsDocumentedBy (for protocols).",
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "IsCitedBy",
+                    "IsDocumentedBy"
+                  ]
+                }
+              },
+              "Citation": {
+                "description": "Complete citation for the publication or other related information.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "Image": {
+          "description": "The Image category includes 33 metadata fields that describe the size and 3-dimensional orientation of the image, the channels and fluorophores used, and the location of relevant landmarks.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "datasetID": {
+                "description": "Unique identifier for a microscopy dataset",
+                "type": ["string", "number"]
+              },
+              "xAxis": {
+                "description": "Predominant tissue direction as one moves from the left side of the image to the right side of the image.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Left-to-right",
+                  "Right-to-left",
+                  "Anterior-to-posterior",
+                  "Posterior-to-anterior",
+                  "Inferior-to-superior",
+                  "Superior-to-inferior",
+                  "Oblique",
+                  null
+                ]
+              },
+              "obliqueXDim1": {
+                "description": "Only if xAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Left",
+                  "Right",
+                  null
+                ]
+              },
+              "obliqueXDim2": {
+                "description": "Only if xAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Anterior",
+                  "Posterior",
+                  null
+                ]
+              },
+              "obliqueXDim3": {
+                "description": "Only if xAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Inferior",
+                  "Superior",
+                  null
+                ]
+              },
+              "yAxis": {
+                "description": "Predominant tissue direction as one moves from the top of the image to the bottom of the image.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Left-to-right",
+                  "Right-to-left",
+                  "Anterior-to-posterior",
+                  "Posterior-to-anterior",
+                  "Inferior-to-superior",
+                  "Superior-to-inferior",
+                  "Superior-to-inferior",
+                  "Oblique",
+                  null
+                ]
+              },
+              "obliqueYDim1": {
+                "description": "Only if yAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Left",
+                  "Right",
+                  null
+                ]
+              },
+              "obliqueYDim2": {
+                "description": "Only if yAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Anterior",
+                  "Posterior",
+                  null
+                ]
+              },
+              "obliqueYDim3": {
+                "description": "Only if yAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Inferior",
+                  "Superior",
+                  null
+                ]
+              },
+              "zAxis": {
+                "description": "Predominant tissue direction as one follows a given pixel position through the stack of images from the first image to the last image.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Left-to-right",
+                  "Right-to-left",
+                  "Anterior-to-posterior",
+                  "Posterior-to-anterior",
+                  "Inferior-to-superior",
+                  "Superior-to-inferior",
+                  "Oblique",
+                  null
+                ]
+              },
+              "obliqueZDim1": {
+                "description": "Only if zAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Left",
+                  "Right",
+                  null
+                ]
+              },
+              "obliqueZDim2": {
+                "description": "Only if zAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Anterior",
+                  "Posterior",
+                  null
+                ]
+              },
+              "obliqueZDim3": {
+                "description": "Only if zAxis is oblique, enter the orientation.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Inferior",
+                  "Superior",
+                  null
+                ]
+              },
+              "landmarkName": {
+                "description": "Name of the landmark (e.g., bregma).",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "landmarkX": {
+                "description": "X coordinate of the landmark.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "landmarkY": {
+                "description": "Y coordinate of the landmark.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "landmarkZ": {
+                "description": "Z coordinate of the landmark.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Number": {
+                "description": "Number assigned to each channel.",
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "displayColor": {
+                "description": "Display color of each channel in triplet (red, green, blue) format.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "Representation": {
+                "description": "What the channel represents (e.g., rhodopsin, virus).",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Flurophore": {
+                "description": "Fluorophore used in the channel (e.g., egfp, alexa-561, ATO-647). ",
+                "type": "array",
+                "items": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "stepSizeX": {
+                "description": "Physical step size in the X-dimension (e.g., pixel size represents the number of microns).",
+                "type": "string"
+              },
+              "stepSizeY": {
+                "description": "Physical step size in the Y-dimension (e.g., pixel size represents the number of microns).",
+                "type": "string"
+              },
+              "stepSizeZ": {
+                "description": "Distance between the center of one image and the center of adjacent images in the Zdimension (space in microns between slices).",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "stepSizeT": {
+                "description": "Physical step size in the T dimension (time).",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Channel": {
+                "description": "Number of channels.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Slices": {
+                "description": "Number of slices per channel (approximate).",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "t": {
+                "description": "Number of timepoints.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "xSize": {
+                "description": "Number of pixels in the X-dimension.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "ySize": {
+                "description": "Number of pixels in the Y-dimension.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "zSize": {
+                "description": "Number of pixels in the Z-dimension.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "Gbyte": {
+                "description": "Total size in gigabytes.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "File": {
+                "description": "Total number of image files.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "dimensionOrder": {
+                "description": "XYZT, or whatever order is used.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "xAxis",
+            "yAxis",
+            "zAxis",
+            "Number",
+            "displayColor",
+            "stepSizeX",
+            "stepSizeY"
+          ],
+          "additionalProperties": false,
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "xAxis": {
+                    "const": "Oblique"
+                  }
+                },
+                "required": [
+                  "xAxis"
+                ]
+              },
+              "then": {
+                "required": [
+                  "obliqueXDim1",
+                  "obliqueXDim2",
+                  "obliqueXDim3"
+                ],
+                "properties": {
+                  "obliqueXDim1": {
+                    "type": "string",
+                    "enum": [
+                      "Left",
+                      "Right"
+                    ]
+                  },
+                  "obliqueXDim2": {
+                    "type": "string",
+                    "enum": [
+                      "Anterior",
+                      "Posterior"
+                    ]
+                  },
+                  "obliqueXDim3": {
+                    "type": "string",
+                    "enum": [
+                      "Inferior",
+                      "Superior"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "yAxis": {
+                    "const": "Oblique"
+                  }
+                },
+                "required": [
+                  "yAxis"
+                ]
+              },
+              "then": {
+                "required": [
+                  "obliqueYDim1",
+                  "obliqueYDim2",
+                  "obliqueYDim3"
+                ],
+                "properties": {
+                  "obliqueYDim1": {
+                    "type": "string",
+                    "enum": [
+                      "Left",
+                      "Right"
+                    ]
+                  },
+                  "obliqueYDim2": {
+                    "type": "string",
+                    "enum": [
+                      "Anterior",
+                      "Posterior"
+                    ]
+                  },
+                  "obliqueYDim3": {
+                    "type": "string",
+                    "enum": [
+                      "Inferior",
+                      "Superior"
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "zAxis": {
+                    "const": "Oblique"
+                  }
+                },
+                "required": [
+                  "zAxis"
+                ]
+              },
+              "then": {
+                "required": [
+                  "obliqueZDim1",
+                  "obliqueZDim2",
+                  "obliqueZDim3"
+                ],
+                "properties": {
+                  "obliqueZDim1": {
+                    "type": "string",
+                    "enum": [
+                      "Left",
+                      "Right"
+                    ]
+                  },
+                  "obliqueZDim2": {
+                    "type": "string",
+                    "enum": [
+                      "Anterior",
+                      "Posterior"
+                    ]
+                  },
+                  "obliqueZDim3": {
+                    "type": "string",
+                    "enum": [
+                      "Inferior",
+                      "Superior"
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Instrument": {
+          "description": "The Instrument category includes 12 metadata fields that describe the instrument.",
+          "type": "array",
+          "additionalProperties": false,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "datasetID": {
+                "description": "Unique identifier for a microscopy dataset",
+                "type": ["string", "number"]
+              },
+              "microscopeType": {
+                "description": "Type of microscope used to capture the image (e.g., inverted, upright, light sheet, confocal, two photon).",
+                "type": "string"
+              },
+              "microscopeManufacturerAndModel": {
+                "description": "Manufacturer and model of the microscope used.",
+                "type": "string"
+              },
+              "objectiveManufacturerAndModel": {
+                "description": "Manufacturer and model of the lens used.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "objectiveImmersion": {
+                "description": "Immersion medium for the lens. Suggested values: Air, Glycerol, Multi, Oil, Water, Water dipping.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "objectiveNA": {
+                "description": "Lens numerical aperture.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "objectiveMagnification": {
+                "description": "Lens magnification.",
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "detectorType": {
+                "description": "Type of detector used. Suggested values: CCD, Intensified CCD, Analog video, PMT, Photodiode, CMOS, EBCCD, FTIR, spectroscopy, Lifetime imaging, Correlation spectroscopy, EMCCD, APD, etc.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "detectorManufacturerAndModel": {
+                "description": "Manufacturer and model of the detector.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "illuminationType": {
+                "description": "Type of illumination. Suggested values: Gas, Metal vapor, Solid state, Dye, Semiconductor, Free electron, etc. ",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "illuminationWavelength": {
+                "description": "Bandwidth of illumination light.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "detectionWavelength": {
+                "description": "Bandwidth of collected light.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "sampleTemperature": {
+                "description": "Sample temperature at capture.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "required": [
+            "microscopeType",
+            "microscopeManufacturerAndModel"
+          ]
+        },
+        "Dataset": {
+          "description": "The Dataset category includes 14 metadata fields that provide a high-level description of the data including title, abstract, methods, imaging modality, and how the data can be reused.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "Title",
+              "Rights",
+              "rightsURI",
+              "rightsIdentifier",
+              "Abstract",
+              "Methods",
+              "technicalInfo"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "datasetID": {
+                "description": "Unique identifier for a microscopy dataset",
+                "type": ["string", "number"]
+              },
+              "Title": {
+                "description": "Short phrase by which the specific dataset is known (e.g., title of a book).",
+                "type": "string"
+              },
+              "socialMedia": {
+                "description": "Suggested short social media text describing the dataset to be posted after the dataset is available (can include tags). May be same as the title.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Subject": {
+                "description": "Description of the dataset using keywords, classification codes, or key phrases.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "subjectScheme": {
+                "description": "Name of subject scheme or classification (e.g., Allen Mouse Brain Atlas Version2).",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Rights": {
+                "description": "Any rights information for the dataset. May be the name of the license and can include embargo or other use restrictions on data (see https://spdx.org/licenses).",
+                "type": "string"
+              },
+              "rightsURI": {
+                "description": "If using a common license and licensing information is online, provide a link to the license.",
+                "type": "string"
+              },
+              "rightsIdentifier": {
+                "description": "If using a common license, provide the Software Package Data Exchange (SPDX) code for the license (see https://spdx.org/licenses).",
+                "type": "string"
+              },
+              "Image": {
+                "description": "Suggested static image or animated GIF to associate with the social media and/or web landing page for the dataset.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "generalModality": {
+                "description": "Description of the general modality of the dataset.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Cell morphology",
+                  "Connectivity",
+                  "Population imaging",
+                  "Spatial",
+                  "transcriptomics",
+                  "Other",
+                  null
+                ]
+              },
+              "generalModalityOther": {
+                "description": "If generalModality is Other, list the modality used.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Technique": {
+                "description": "Description of the technique used.",
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "Anterograde tracing",
+                  "DARTFISH",
+                  "fMOST",
+                  "MERFISH",
+                  "Patch-seq",
+                  "Retrograde",
+                  "Retrograde tracing",
+                  "smFISH",
+                  "Transynaptic tracing",
+                  "TRIO tracing",
+                  "Other",
+                  null
+                ]
+              },
+              "techniqueOther": {
+                "description": "If Technique is Other, list the technique used.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "Abstract": {
+                "description": "Additional descriptive information about the dataset, including a brief description and the context in which it was created (e.g., aim of the experiment, what the dataset is expected to show). This abstract will be used on the Digital Object Identifier (DOI) landing page and will be the primary description of the dataset; ideally 100+ words.",
+                "type": "string"
+              },
+              "Methods": {
+                "description": "Additional descriptive information about how the biological materials were processed by the laboratories involved. May be used to describe the methodology (or protocols) used.",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "technicalInfo": {
+                "description": "Additional descriptive information about how the data was processed computationally by the laboratories involved. May be used to describe the computational processing done with software versions and parameters. ",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "generalModality": {
+                      "const": "Other"
+                    }
+                  },
+                  "required": [
+                    "generalModality"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "generalModalityOther"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "Technique": {
+                      "const": "Other"
+                    }
+                  },
+                  "required": [
+                    "Technique"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "techniqueOther"
+                  ]
+                }
+              }
+            ]
+          }
+
+        }
+      },
+      "required": [
+        "Contributors",
+        "Dataset",
+        "Funders",
+        "Image",
+        "Instrument",
+        "Specimen"
+      ]
+    }
+  }
+}

@@ -1,3 +1,8 @@
+## EXCEL TEMPLATE CONVERSION PARAMETERS
+# Specify your input excel file to convert and place it in 'json_schemas/input_files'
+input_excel_file: microscopy_metadata_entry.xlsm #microscopy_metadata_entry_template.xlsm
+
+## JSON SCHEMA VALIDATOR PARAMETERS
 # Name of metadata category
 # Options and details can be found in README.md: contributors, dataset, funders, image, instrument, publications, specimen
 category: contributors

@@ -1,0 +1,63 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "[unique_identifier_for_this_schema]",
+    "title": "Specimen",
+    "description": "The Specimen category includes 12 metadata fields that describe the donor, organ, and sample being studied.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+            "LocalID": {
+                "description": "Local (lab) reference ID attached to the donor organism (if any). ",
+                "type": "string"
+            },
+            "Species": {
+                "description": "Common organism classification name for the donor organism (e.g., mouse, human).",
+                "type": "string",
+            },
+            "NCBITaxonomy": {
+                "description": "National Center for Biotechnology Information (NCBI) taxonomy code for species of the donor organism.",
+                "type": "string"
+            },
+            "Age": {
+                "description": "Age of the donor (or unknown).",
+                "type": "number"
+            },
+            "ageUnit": {
+                "description": "Unit for the age of the donor.",
+                "type": "string",
+                "enum": ["Days", "Months", "Years"]
+            },
+            "Sex": {
+                "description": "Sex of the donor.",
+                "type": "string",
+                "enum": ["Female", "Male", "Unknown"]
+            },
+            "Genotype": {
+                "description": "If relevant, genotype or transgenetic line information (e.g., Strain name, Cre driver line, Reporter name).",
+                "type": "string"
+            },
+            "organLocalID": {
+                "description": "Local (lab) reference ID attached to the organ (if any).",
+                "type": "string"
+            },
+            "organName": {
+                "description": "Component part of the nervous system where the tissue is found (e.g., brain, spinal cord).",
+                "type": "string"
+            },
+            "sampleLocalID": {
+                "description": "Local (lab) reference ID attached to the sample (if any).",
+                "type": "string"
+            },
+            "Atlas": {
+                "description": "If an atlas was used to describe the location, list the name of the atlas. Suggested values: Allen Mouse V1, Allen Mouse V2, Allen Mouse V3, Allen Human 34yrs Whole Brain, Whole Brain.",
+                "type": "string"
+            },
+            "Location": {
+                "description": "(Sub)location or region where the tissue is found.",
+                "type": "string"
+            }
+                    
+    },
+    "required": ["Species", "NCBITaxonomy", "Age", "ageUnit", "Sex"]
+
+}

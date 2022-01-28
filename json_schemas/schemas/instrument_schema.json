@@ -1,0 +1,61 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "INSTRUMENT",
+    "title": "Instrument",
+    "description": "The Instrument category includes 12 metadata fields that describe the instrument.",
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+            "microscopeType": {
+                "description": "Type of microscope used to capture the image (e.g., inverted, upright, light sheet, confocal, two photon).",
+                "type": "string"
+            },
+            "microscopeManufacturerAndModel": {
+                "description": "Manufacturer and model of the microscope used.",
+                "type": "string"
+            },
+            "objectiveManufacturerAndModel": {
+                "description": "Manufacturer and model of the lens used.",
+                "type": "string"
+            },
+            "objectiveImmersion": {
+                "description": "Immersion medium for the lens. Suggested values: Air, Glycerol, Multi, Oil, Water, Water dipping.",
+                "type": "string"
+            },
+            "objectiveNA": {
+                "description": "Lens numerical aperture.",
+                "type": "number"
+            },
+            "objectiveMagnification": {
+                "description": "Lens magnification.",
+                "type": "number"
+            },
+            "detectorType": {
+                "description": "Type of detector used. Suggested values: CCD, Intensified CCD, Analog video, PMT, Photodiode, CMOS, EBCCD, FTIR, spectroscopy, Lifetime imaging, Correlation spectroscopy, EMCCD, APD, etc.",
+                "type": "string"
+            },
+            "detectorManufacturerAndModel": {
+                "description": "Manufacturer and model of the detector.",
+                "type": "string"
+            },
+            "illuminationType": {
+                "description": "Type of illumination. Suggested values: Gas, Metal vapor, Solid state, Dye, Semiconductor, Free electron, etc. ",
+                "type": "string"
+            },
+            "illuminationWavelength": {
+                "description": "Bandwidth of illumination light.",
+                "type": "string"
+            },
+            "detectionWavelength": {
+                "description": "Bandwidth of collected light.",
+                "type": "string"
+            },
+            "sampleTemperature": {
+                "description": "Sample temperature at capture.",
+                "type": "string"
+            }
+    },
+    "required": ["microscopeType", "microscopeManufacturerAndModel"]
+
+        
+}
