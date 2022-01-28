@@ -5,7 +5,9 @@ import pandas as pd
 import os
 import yaml
 import argparse
+import warnings
 
+warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 from jsonschema import validate, exceptions
 from jsonschema.validators import Draft7Validator
 
@@ -51,15 +53,22 @@ def extract_csvs(input_excel_file, datestamp):
     :param input_excel_file: excel file to extract metadata from
     :return: None
     """
+
+    sheet_names = ['Contributors', 'Publications', 'Funders', 'Instrument', 'Dataset', "Specimen", "Image", "README", "dropdown"]
     excel_dict = pd.read_excel(input_excel_file, sheet_name=None, skiprows=2, engine="openpyxl")
-    path = f'json_schemas/output_files/{datestamp}'
+    path = f"json_schemas/output_files/{datestamp}"
 
     if not os.path.exists(path):
         os.makedirs(path)
 
+    if not all(e in excel_dict.keys() for e in sheet_names):
+        missing_sheets = [e for e in sheet_names if e not in excel_dict.keys()]
+        raise Exception(f"{' and '.join(missing_sheets)} category/categories were expected but is/are missing.")
     for sheet in excel_dict.keys():
         if sheet == "README" or sheet == "dropdown":
             continue
+        elif sheet not in sheet_names:
+            raise Exception(f"{sheet} is not a known metadata category.")
         else:
             output_file = f'{path}/{sheet.lower()}_{datestamp}.csv'
             with open(output_file, 'w+', encoding="utf-8") as f:
