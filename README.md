@@ -1,7 +1,7 @@
-# Essential Metadata for 3D Brain Microscopy - JSON Validation
+# 3D Microscopy Metadata Standards (3D-MMS)  - JSON Validation
 
 ## Overview
-The Essential Metadata for 3D BRAIN Microscopy, developed by the [BRAIN 3D Microscopy Working Group](https://doryworkspace.org/WorkingGroupRoster), helps ensure that a 3D microscopy dataset is sufficiently described to support its’ re-use by scientists who did not generate the data. Adoption of these metadata standards will aid investigators who want to share data, helping them to evaluate and decide which data can be combined.
+The 3D Microscopy Metadata Standards (3D-MMS)  developed by the [BRAIN 3D Microscopy Working Group](https://doryworkspace.org/WorkingGroupRoster), helps ensure that a 3D microscopy dataset is sufficiently described to support its’ re-use by scientists who did not generate the data. Adoption of these metadata standards will aid investigators who want to share data, helping them to evaluate and decide which data can be combined.
 
 The metadata fields are organized into seven categories: Contributors, Funders, Publication, Instrument, Dataset, Specimen, and Image.  Each metadata field is specified by a name, definition, a list of allowable values, whether it is required, and the number of times it can be repeated for a dataset.  The tables for each metadata field can be found at the DORY Workspace site linked below:
 
