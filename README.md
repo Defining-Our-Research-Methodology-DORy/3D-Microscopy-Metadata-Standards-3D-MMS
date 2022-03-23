@@ -42,8 +42,8 @@ A `config.yaml` file is provided where a user can specify input files and catego
 
 Input files should be placed in the directory `json_schemas/input_files`.
 
-## BRAIN Image Data Input
-To add BRAIN image data, use the following steps:
+## Data Input in Excel Format
+To add microscopy metadata, use the following steps:
 - navigate to `json_schemas/input_files`
 - make a copy of the Excel file `microscopy_metadata_entry_template.xlsm` and rename to something else (suggested `microscopy_metadata_entry.xlsm`)
 - change the `input_excel_file` parameter above to this new name
@@ -52,7 +52,7 @@ To add BRAIN image data, use the following steps:
 ## Data Conversion and Validation usage
 
 ### Purpose
-The conversion script is used to convert input BRAIN datasets in Excel form to a JSON format, which is then run through a JSON Schema validator to confirm that the data meets criteria found on the DORY website.  After converting the BRAIN datasets from Excel to JSON formats, the validator will check the newly generated JSON file against pre-defined JSON schemas.  Any resulting discrepancies or errors will be displayed on the command line terminal.
+The conversion script is used to convert input datasets in Excel form to a JSON format, which is then run through a JSON Schema validator to confirm that the data meets criteria found on the DORY website.  After converting the BRAIN datasets from Excel to JSON formats, the validator will check the newly generated JSON file against pre-defined JSON schemas.  Any resulting discrepancies or errors will be displayed on the command line terminal.
 
 ### Usage
 To run the conversion script, from the main directory, run the following in the command line.
