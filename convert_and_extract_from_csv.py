@@ -13,11 +13,11 @@ from jsonschema.validators import Draft7Validator
 
 # ========================================== Script Information ===========================================
 '''
-This script takes an input data entry excel file containing metadata for the BRAIN project and splits it into individual 
+This script takes an input data entry excel file containing metadata and splits it into individual 
 csv files for each metadata group (Contributors, Funders, etc.). The individual csv files are then parsed and converted
 into a dictionary representation of the metadata record which is then written to a json file. The json file can be
 validated against record_schema.json.
-Data entry file: brain-metadata-validation/json_schemas/input_files/3D_brain_microscopy_metadata_entry_template.xlsm 
+Data entry file: 3D-Microscopy-Metadata-Standards-3D-MMS/json_schemas/input_files/3D_brain_microscopy_metadata_entry_template.xlsm 
 '''
 # ========================================== Functions ===========================================
 def split_csv(val):
