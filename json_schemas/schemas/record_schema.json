@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "RECORD",
   "title": "Record",
-  "description": "The schema for a 3D BRAIN Microscopy Record",
+  "description": "The schema for a 3D Microscopy Record",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
